@@ -17,6 +17,9 @@ script:
 
 after_success:
   - firebase deploy --token $FIREBASE_TOKEN
+
+notifications:
+  slack: makeit-espacio:ubMTKCxi0L8ihePJmUb1lbrz
 # install:
 #   - npm install -g firebase-tools
 #   - npm install -g @angular/cli
