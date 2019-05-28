@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/chiprestore",
+    "public": "dist/Chiprestore",
     "ignore": [
       "firebase.json",
       "**/.*",
