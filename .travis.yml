@@ -23,9 +23,9 @@ install:
 
 jobs:
   include:
-    - stage: test
-      script: ng test
-#     - stage: build
-#       script: ng build --prod --aot
-#     - stage: deploy
-#       script: firebase deploy --token $FIREBASE_TOKEN
+#     - stage: test
+#       script: ng test
+    - stage: build
+      script: ng build --prod --aot
+    - stage: deploy
+      script: firebase deploy --token $FIREBASE_TOKEN
