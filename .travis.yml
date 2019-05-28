@@ -11,23 +11,20 @@ branches:
 # before_script:
 #   - npm install -g firebase-tools
 #   - npm install -g @angular/cli
+#
+# script:
+#   - ng build --prod --aot
+#
+# after_success:
+#   - firebase deploy --token $FIREBASE_TOKEN
 install:
   - npm install -g firebase-tools
   - npm install -g @angular/cli
 
-script:
-  - ng build --prod --aot
-
-
-after_success:
-  - firebase deploy --token $FIREBASE_TOKEN
-# install:
-#   - npm install -g firebase-tools
-#   - npm install -g @angular/cli
-# jobs:
-#   include:
-#     - stage: test
-#       script: ng test
+jobs:
+  include:
+    - stage: test
+      script: ng test
 #     - stage: build
 #       script: ng build --prod --aot
 #     - stage: deploy
