@@ -13,6 +13,7 @@ before_script:
   - npm install -g @angular/cli
 
 script:
+  - ng test --watch=false --browsers=ChromeHeadless
   - ng build --prod --aot
 
 after_success:
