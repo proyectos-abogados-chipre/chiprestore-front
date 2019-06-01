@@ -1,1 +1,72 @@
 /* You can add global styles to this file, and also import other style files */
+
+app-navbar {
+    width: -webkit-fill-available;
+}
+
+:root {
+    --mdc-theme-primary: #33691E;
+    --mdc-theme-secondary: #A1887F;
+    --mdc-theme-background: rgb(161, 161, 161);
+    --mdc-theme-surface: #fff;
+    --mdc-theme-error: #b00020;
+    --mdc-theme-on-primary: #fff;
+    --mdc-theme-on-secondary: #fff;
+    --mdc-theme-on-surface: #000;
+    --mdc-theme-on-error: #fff;
+    --mdc-theme-text-primary-on-background: rgba(0, 0, 0, 0.87);
+    --mdc-theme-text-secondary-on-background: rgba(0, 0, 0, 0.54);
+    --mdc-theme-text-hint-on-background: rgba(0, 0, 0, 0.38);
+    --mdc-theme-text-disabled-on-background: rgba(0, 0, 0, 0.38);
+    --mdc-theme-text-icon-on-background: rgba(0, 0, 0, 0.38);
+    --mdc-theme-text-primary-on-light: rgba(0, 0, 0, 0.87);
+    --mdc-theme-text-secondary-on-light: rgba(0, 0, 0, 0.54);
+    --mdc-theme-text-hint-on-light: rgba(0, 0, 0, 0.38);
+    --mdc-theme-text-disabled-on-light: rgba(0, 0, 0, 0.38);
+    --mdc-theme-text-icon-on-light: rgba(0, 0, 0, 0.38);
+    --mdc-theme-text-primary-on-dark: white;
+    --mdc-theme-text-secondary-on-dark: rgba(255, 255, 255, 0.7);
+    --mdc-theme-text-hint-on-dark: rgba(255, 255, 255, 0.5);
+    --mdc-theme-text-disabled-on-dark: rgba(255, 255, 255, 0.5);
+    --mdc-theme-text-icon-on-dark: rgba(255, 255, 255, 0.5);
+}
+
+.mdc-button-primary {
+    background-color: #33691E!important;
+    color: #ffffff!important;
+}
+
+.mdc-button-secundary {
+    background-color: #A1887F!important;
+    color: #000000!important;
+}
+
+.mdc-drawer {
+    background-color: #33691E!important;
+}
+
+.mdc-drawer .mdc-list-item {
+    color: #ffffff!important
+}
+
+.mdc-drawer .mdc-list-item__graphic {
+    color: white
+}
+
+.mdc-drawer .mdc-list-group__subheader {
+    color: white
+}
+
+.mdc-list {
+    color: #ffffff
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
