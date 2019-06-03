@@ -6,9 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./resumen.component.css']
 })
 export class ResumenComponent implements OnInit {
-
-  constructor() { }
-
+ 
   ngOnInit() {
   }
 

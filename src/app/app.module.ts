@@ -12,9 +12,9 @@ import { AdministrarProductosComponent } from './components/administrar-producto
 import { SucursalesComponent } from './components/sucursales/sucursales.component';
 
 //Angular material
-// import {  MatFormField, MatLabel, MatSelect, MatOption, MatFormFieldModule, MatSelectModule, MatOptionModule } from '@angular/material';
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MatOptionModule, MatSelectModule, MatFormFieldModule, MatInputModule, MatIconModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -35,13 +35,13 @@ import { SucursalesComponent } from './components/sucursales/sucursales.componen
     BrowserModule,
     appRoutes,
 
-    
-    // MatFormFieldModule,
-    // MatLabel,
-    // MatSelectModule,
-    // MatOptionModule,
-    // BrowserAnimationsModule,
-    // MatButtonModule, MatCheckboxModule
+    BrowserAnimationsModule,
+    FormsModule,    
+    MatFormFieldModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatInputModule,
+    MatIconModule
 
   ],
   providers: [],
