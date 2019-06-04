@@ -5,6 +5,10 @@ node_js:
 cache: npm
 
 branches:
+  except:
+  - master
+
+branches:
   only:
     - developer
 
