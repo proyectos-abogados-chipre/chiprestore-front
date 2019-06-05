@@ -7,8 +7,6 @@ cache: npm
 branches:
   only:
     - developer
-  except:
-    - master
 
 before_script:
   - npm install -g firebase-tools
