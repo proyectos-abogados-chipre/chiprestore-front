@@ -1,12 +1,12 @@
-<div class=" p-2 bd-highlight nav" style="width: inherit; ">
-    <nav class="navbar sticky-top navbar-light bg-light" style="width: inherit; justify-content: flex; padding-right: 15px;box-shadow: 0 16px 38px -12px rgba(0, 0, 0, .56), 0 4px 25px 0 rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .2); z-index: 1">
+<div class="bd-highlight nav" style="width: inherit; z-index:2">
+    <nav class="navbar sticky-top navbar-light bg-light" style="width: inherit; justify-content: flex; padding-right: 15px;box-shadow: 0 16px 38px -12px rgba(0, 0, 0, .56), 0 4px 25px 0 rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .2); z-index: 1; height: 65px;">
         <h2 class="mdc-drawer__title ">ChipreStore</h2>
 
         <div class="align-content-right" style="display: flex">
 
             <mat-form-field style="width: 100px">
                 <mat-label>Usuario</mat-label>
-                <mat-select style="z-index: 2">
+                <mat-select style="z-index: 3">
                     <mat-option *ngFor="let usuario of usuarios" [value]="usuario">
                         {{usuario|titlecase}}
                     </mat-option>

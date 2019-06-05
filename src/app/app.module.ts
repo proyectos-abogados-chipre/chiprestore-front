@@ -12,7 +12,7 @@ import { AdministrarProductosComponent } from './components/administrar-producto
 import { SucursalesComponent } from './components/sucursales/sucursales.component';
 
 //Angular material
-import { MatOptionModule, MatSelectModule, MatFormFieldModule, MatInputModule, MatIconModule } from '@angular/material';
+import { MatOptionModule, MatSelectModule, MatFormFieldModule, MatInputModule, MatIconModule, MatCardModule, MatGridListModule, MatButtonModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -41,7 +41,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatOptionModule,
     MatSelectModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule,
+    MatGridListModule,
+    MatButtonModule
+    
 
   ],
   providers: [],

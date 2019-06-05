@@ -1,3 +1,5 @@
+/* Search bar */
+
 .example-form {
     /* min-width: 150px;
     max-width: 500px; */
@@ -17,4 +19,16 @@ mat-form-field {
     width: 100%;
     margin-left: 15%;
     margin-right: 15%;
+}
+
+
+/* results cards */
+
+.example-card {
+    max-width: 250px;
+}
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
 }
