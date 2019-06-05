@@ -5,19 +5,14 @@ node_js:
 cache: npm
 
 branches:
-  except:
-  - master
-
-branches:
   only:
-    - developer
+    - master
 
 before_script:
   - npm install -g firebase-tools
   - npm install -g @angular/cli
 
 script:
-  - ng test --watch=false --browsers=ChromeHeadless
   - ng build --prod --aot
 
 after_success:
