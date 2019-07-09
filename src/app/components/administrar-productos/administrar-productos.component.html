@@ -1,21 +1,50 @@
-<div class="container">
-    <div class="row" style="margin: 0px">
-        <form class="example-form">
-
-            <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Buscar producto</mat-label>
-                <input type="text" matInput placeholder="Ingrese detalles de la prenda" sty>
-                <mat-icon matSuffix>search</mat-icon>
-
+<div class="container">    
+    <form class="" style="margin-top:15px">
+        <div class="row" style="margin: 0px">
+            <mat-form-field class="col-sm-3" >
+                <mat-label>Codigo</mat-label>
+                <input type="text" matInput placeholder="">
+                
             </mat-form-field>
 
+            <mat-form-field class="col-sm-3" >
+                <mat-label>Prenda</mat-label>
+                <input type="text" matInput placeholder="Detalles de la prenda">
+                
+            </mat-form-field>
+            
+  
+        </div>
+        <div class="row" style="margin: 0px">
+            <mat-form-field class="col-sm-3"  >
+                <mat-label>Marca</mat-label>
+                <input type="text" matInput >
+                                
+            </mat-form-field>
 
+            <mat-form-field class="col-sm-3"  >
+                <mat-label>Color</mat-label>
+                <input type="text" matInput >
+                
+            </mat-form-field>
 
+            <mat-form-field class="col-sm-3"  >
+                <mat-label>Talle</mat-label>
+                <input type="text" matInput >
+                
+            </mat-form-field>
+            
+
+        </div>
         </form>
-    </div>
+        <button class="mdc-fab nuevoProducto" (click)="nuevoProducto()">
+            <i class="mdc-fab__icon material-icons">add</i>
+        </button>
+
+   
 
     <div class="card-columns" style="z-index: 0">
-        <mat-card class="card" *ngFor="let prenda of prendasArray" style="margin-top: 10px; margin-bottom: 10px;">
+        <mat-card class="card" *ngFor="let prenda of prendasArray" style="margin-top: 10px; margin-bottom: 10px;" >
 
             <img mat-card-image src="{{prenda['img']}}">
             <mat-card-content>
@@ -24,8 +53,8 @@
                 </p>
             </mat-card-content>
             <mat-card-actions>
-                <button class="mdc-button mdc-button--raised" style="margin-right: 10px">Ver mas</button>
-                <button class="mdc-button mdc-button--outlined">Editar</button>
+                <button class="mdc-button mdc-button--raised" (click)="openModal(prenda)">Ver mas</button>
+                
             </mat-card-actions>
         </mat-card>
     </div>

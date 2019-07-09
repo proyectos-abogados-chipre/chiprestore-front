@@ -12,9 +12,10 @@ import { AdministrarProductosComponent } from './components/administrar-producto
 import { SucursalesComponent } from './components/sucursales/sucursales.component';
 
 //Angular material
-import { MatOptionModule, MatSelectModule, MatFormFieldModule, MatInputModule, MatIconModule, MatCardModule, MatGridListModule, MatButtonModule } from '@angular/material';
+import { MatOptionModule, MatSelectModule, MatFormFieldModule, MatInputModule, MatIconModule, MatCardModule, MatGridListModule, MatButtonModule, MatDialogModule, MatTableModule, MatTabsModule, MatCardImage } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ModalProductoComponent } from './components/administrar-productos/modal-producto/modal-producto.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     ResumenComponent,
     AdministrarProductosComponent,
     SucursalesComponent,
+    ModalProductoComponent,
 
 
 
@@ -44,10 +46,18 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatIconModule,
     MatCardModule,
     MatGridListModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    MatTabsModule
+    
     
 
   ],
+  //Carga perezosa de un componente, que no es cargado en la plantilla
+  entryComponents: [
+    ModalProductoComponent
+  ],
+
   providers: [],
   bootstrap: [AppComponent]
 })

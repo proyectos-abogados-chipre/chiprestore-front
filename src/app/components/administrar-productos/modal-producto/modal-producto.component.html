@@ -1,0 +1,53 @@
+<mat-tab-group style="height: -webkit-fill-available">
+  <mat-tab label="Producto"> 
+    <div class="modal-body" style="display: inline-block; width: 100%;  align-self: center;">
+        <div class="labels"style="overflow: auto;">
+
+        <div class="row" style="margin-top: 10px; margin-bottom: 10px">
+          <div class="col" style="text-align: center">
+              <a href="">
+                <img *ngIf="this.prenda.img==''" src="assets/img/add-img.png" alt="">
+                <img mat-card-image *ngIf="this.prenda.img!=''" [src]="this.prenda.img" alt="" style="width: calc(99% + 32px);">
+                
+              </a>
+              <input type="file" (change)="cargarImagen($event)">
+          </div>
+        </div>
+        <div class="row">            
+            <mat-form-field  class="col" >
+              <input matInput placeholder="Prenda" [value]="this.prenda['nombre']" [(ngModel)]="this.prenda['nombre']">
+            </mat-form-field>
+      
+            <mat-form-field  class="col">
+              <input matInput placeholder="Descripcion" [(ngModel)]="this.prenda['descripcion']">
+            </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field class="col">
+          <input matInput placeholder="Marca" [(ngModel)]="this.prenda['marca']">
+          </mat-form-field>
+          <mat-form-field class="col">
+          <input matInput placeholder="Color" [value]="this.prenda['color']" [(ngModel)]="this.prenda['color']">
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field class="col">
+            <input matInput placeholder="Precio de costo">
+            <span matPrefix>$&nbsp;</span>
+          </mat-form-field>
+          <mat-form-field class="col">
+            <input matInput placeholder="Precio de venta" [value]="this.prenda['precio']">
+            <span matPrefix>$&nbsp;</span>
+          </mat-form-field>
+        </div>
+      </div>
+      <div style="display: flex;justify-content:center; margin-top: 10px">
+        <button class="mdc-button mdc-button--outlined" [mat-dialog-close]="false" style="margin-right: 10px">Cancelar</button>
+        <button class="mdc-button mdc-button--raised"  cdkFocusInitial (click)="closeModal()">Guardar</button>
+      </div>
+    </div>
+
+  </mat-tab>
+  <mat-tab label="Recepción"> </mat-tab>
+  
+</mat-tab-group>

@@ -1,0 +1,19 @@
+.modal-body>.labels>.row,.modal-body>.imgs>.row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.labels{
+    overflow: auto;
+    /* height: -webkit-fill-available; */
+    margin: 0px;
+    min-width: -webkit-fill-available;
+    max-width: -webkit-fill-available;
+}
+
+.col{
+    /* width: 50%; */
+}
+.modal-body{
+    padding: 0px;
+}
