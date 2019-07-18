@@ -20,6 +20,10 @@ export class ModalProductoComponent {
     pVenta: new FormControl(0),
     img: new FormControl(''),
     disp: new FormArray([
+      new FormGroup({
+        talle: new FormControl(''),
+        cant: new FormControl('0')
+      })
     ])
   });
   private imgProducto: string = null;
