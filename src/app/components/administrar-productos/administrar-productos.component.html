@@ -1,33 +1,81 @@
 <div class="container">
-    <div class="row" style="margin: 0px">
-        <form class="example-form">
-
-            <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Buscar producto</mat-label>
-                <input type="text" matInput placeholder="Ingrese detalles de la prenda" sty>
-                <mat-icon matSuffix>search</mat-icon>
-
-            </mat-form-field>
-
-
-
+    <nav 
+    class="navbar sticky-top navbar-light bg-light d-flex justify-content-end" 
+    style="padding:0; padding-left:15px; padding-top: 5px; top: 5px; z-index: 1; height: 3.5rem;"
+    >
+        <form 
+        class="row align-items-center" 
+        *ngIf="visibleFilter"
+        [formGroup]="formQuery" 
+        (ngSubmit)="agregarCategoria()" 
+        style="display: flex; margin:0px; height: -webkit-fill-available; justify-content: right; justify-content: flex-end; align-content: center;"
+        >
+            
+            <mat-form-field class="col-sm-3">
+                <mat-label>Categoria</mat-label>
+                <mat-select formControlName="categoria">
+                  <mat-option value="codigo"> Codigo </mat-option>
+                  <mat-option value="prenda"> Prenda </mat-option>
+                  <mat-option value="marca"> Marca </mat-option>
+                  <mat-option value="color"> Color </mat-option>
+                  <mat-option value="talle" > Talle </mat-option>
+                </mat-select>
+              </mat-form-field>
+            <mat-form-field class="col-sm-6">
+                <mat-label>Busqueda</mat-label>
+                <input type="text" matInput formControlName="valor">
+            </mat-form-field>           
         </form>
-    </div>
+        <a (click)="visibleFilter = !visibleFilter"
+        style="margin-right: 15px; cursor: pointer; display: flex" 
+        [ngStyle]="{'font-style: oblique;': visibleFilter}">
+        Filtrar
+            <mat-icon  >filter_list</mat-icon>
+        </a>
+        
+        </nav>
+        <div class="itemChips">
+            <mat-chip-list #chipList>
+                <div *ngFor="let item of itemsChip; let i = index">
+                    <mat-chip 
+                    *ngIf="item[1]!==''" 
+                    (removed)="removerCategoria(item[0])" 
+                    [removable]="removable" 
+                    style="min-height: 25px; background-color: #a1887fc9; color: white; border-radius: 5px;">
+                        {{item[1]|titlecase}}
+                        <mat-icon matChipRemove >clear</mat-icon>
+                    </mat-chip>
+                </div>
+            </mat-chip-list>
+        </div>
 
-    <div class="card-columns" style="z-index: 0">
-        <mat-card class="card" *ngFor="let prenda of prendasArray" style="margin-top: 10px; margin-bottom: 10px;">
+        
+
+          
+        <button class="mdc-fab nuevoProducto" (click)="nuevoProducto()">
+            <i class="mdc-fab__icon material-icons">add</i>
+        </button>
+
+    <div *ngIf="loading" class="d-flex justify-content-center" style="margin-top: 30%">
+        <mat-spinner ></mat-spinner>
+
+    </div>
+    <div *ngIf="!loading" class="card-columns" style="z-index: 0">
+        <mat-card class="card" *ngFor="let prenda of prendasArray" style="margin-top: 10px; margin-bottom: 10px;" >
 
             <img mat-card-image src="{{prenda['img']}}">
             <mat-card-content>
-                <p>
-                    {{prenda['nombre']}}
+                <p style="font-size: 12px;">
+                    {{prenda['nombre']|titlecase}} {{prenda['marca']|titlecase}} {{prenda['pVenta']|currency}}
                 </p>
             </mat-card-content>
             <mat-card-actions>
-                <button class="mdc-button mdc-button--raised" style="margin-right: 10px">Ver mas</button>
-                <button class="mdc-button mdc-button--outlined">Editar</button>
+                <button class="mdc-button mdc-button--raised" (click)="openModal(prenda)">Ver mas</button>
+                
             </mat-card-actions>
         </mat-card>
     </div>
-
+    <div *ngIf="!loading && prendasArray.length == 0" class="alert alert-secondary" role="alert" style="top:15px">
+        No hay resultados para la busqueda
+    </div>
 </div>

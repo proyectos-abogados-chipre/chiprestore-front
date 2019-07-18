@@ -1,0 +1,31 @@
+.modal-body>.row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.labels{
+    overflow: auto;
+    /* height: -webkit-fill-available; */
+    margin: 0px;
+    min-width: -webkit-fill-available;
+    max-width: -webkit-fill-available;
+}
+
+
+.modal-body{
+    padding: 0px;
+    display: inline-block; width: 100%;  align-self: center; margin-top: 10px; overflow: auto;
+}
+
+img{
+    margin: 0px;
+}
+.imgProducto {
+    height: 300px; width: auto
+}
+@media(max-width: 450px) {
+    .imgProducto {
+        height: 100%;
+        width: 100%;
+   }
+ }
