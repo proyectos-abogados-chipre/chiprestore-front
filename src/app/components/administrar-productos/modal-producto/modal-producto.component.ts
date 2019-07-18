@@ -23,7 +23,7 @@ export class ModalProductoComponent {
     ])
   });
   private imgProducto: string = null;
-  private nuevo: boolean;
+  public nuevo: boolean;
 
   constructor(private modalRef: MatDialogRef<ModalProductoComponent>,
               private prendasService: PrendasService,
