@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+
+// Components
 import { AppComponent } from './app.component';
 import { AdminComponent } from './components/userlayout/admin/admin.component';
 import { appRoutes } from './app.routing';
@@ -10,35 +12,50 @@ import { SidebarComponent } from './components/shared/sidebar/sidebar.component'
 import { ResumenComponent } from './components/resumen/resumen.component';
 import { AdministrarProductosComponent } from './components/administrar-productos/administrar-productos.component';
 import { SucursalesComponent } from './components/sucursales/sucursales.component';
-
-//Angular material
-import { MatOptionModule, MatSelectModule, MatFormFieldModule, MatInputModule, MatIconModule, MatCardModule, MatGridListModule, MatButtonModule, MatDialogModule, MatTableModule, MatTabsModule, MatCardImage } from '@angular/material';
-import { FormsModule } from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ModalProductoComponent } from './components/administrar-productos/modal-producto/modal-producto.component';
+// Angular material
+import { MatOptionModule,
+  MatSelectModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatIconModule,
+  MatCardModule,
+  MatGridListModule,
+  MatButtonModule,
+  MatDialogModule,
+  MatTableModule,
+  MatTabsModule,
+  MatCardImage,
+  MatRadioGroup,
+  MatRadioModule,
+  MatChipsModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule} from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    
     AdminComponent,
     NavbarComponent,
     SidebarComponent,
     ResumenComponent,
     AdministrarProductosComponent,
     SucursalesComponent,
-    ModalProductoComponent,
-
-
-
-  
+    ModalProductoComponent
   ],
   imports: [
     BrowserModule,
     appRoutes,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
 
     BrowserAnimationsModule,
-    FormsModule,    
+
+    // Imports components material design
     MatFormFieldModule,
     MatOptionModule,
     MatSelectModule,
@@ -48,12 +65,14 @@ import { ModalProductoComponent } from './components/administrar-productos/modal
     MatGridListModule,
     MatButtonModule,
     MatDialogModule,
-    MatTabsModule
-    
-    
-
+    MatTabsModule,
+    MatRadioModule,
+    MatChipsModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule
   ],
-  //Carga perezosa de un componente, que no es cargado en la plantilla
+// Carga perezosa de un componente, que no es cargado en la plantilla
   entryComponents: [
     ModalProductoComponent
   ],

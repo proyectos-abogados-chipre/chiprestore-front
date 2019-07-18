@@ -12,11 +12,9 @@ const routes: Routes = [
         { path: 'marketplaces', component: SucursalesComponent },
         { path: 'product/administrate', component: AdministrarProductosComponent },
         // { path: 'product/stock', component: FeatureComponent },
-        { path: '**', redirectTo:'/resume'},
+        { path: '**', redirectTo: '/product/administrate'},
 
     ] },
-
-    
     { path: '**', component: AdminComponent },
 
     //{ path: 'path/:routeParam', component: MyComponent },
@@ -26,4 +24,4 @@ const routes: Routes = [
     //{ path: ..., component: ..., data: { message: 'Custom' }
 ];
 
-export const appRoutes= RouterModule.forRoot(routes)
+export const appRoutes = RouterModule.forRoot(routes);

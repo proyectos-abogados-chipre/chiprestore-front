@@ -1,53 +1,120 @@
-<mat-tab-group style="height: -webkit-fill-available">
-  <mat-tab label="Producto"> 
-    <div class="modal-body" style="display: inline-block; width: 100%;  align-self: center;">
-        <div class="labels"style="overflow: auto;">
+<div class="row" style="margin-top: 0px; margin-bottom: 0px">
+    <div class="col" style="text-align: center">
+        <a 
+        *ngIf="nuevo"
+        (click)="inputImg.click()"
+        style="cursor:pointer ">
+          <img
+          class="uploadImg"
+          src="{{imgProducto}}" 
+          alt=""
+          style="width: 200px; height: auto"
+          id="frame"
+          >
+        </a>
+        <input type="file" 
+        #inputImg 
+        (change)="seleccionarImg($event)" 
+        style="display: none"
+        capture>
 
-        <div class="row" style="margin-top: 10px; margin-bottom: 10px">
-          <div class="col" style="text-align: center">
-              <a href="">
-                <img *ngIf="this.prenda.img==''" src="assets/img/add-img.png" alt="">
-                <img mat-card-image *ngIf="this.prenda.img!=''" [src]="this.prenda.img" alt="" style="width: calc(99% + 32px);">
-                
-              </a>
-              <input type="file" (change)="cargarImagen($event)">
+        <img mat-card-image 
+        class="imgProducto"
+        *ngIf="!nuevo" 
+        [src]="formNuevoProducto.controls.img.value" 
+        alt="imagen de producto seleccionado"
+        style="">
+
+          
+    </div>
+  </div>
+<form [formGroup]="formNuevoProducto" >
+  <mat-tab-group >
+    <mat-tab label="Producto"> 
+      <div class="modal-body">       
+          <div class="row">            
+              <mat-form-field  class="col" >
+                <input matInput placeholder="Prenda" formControlName="prenda" required>
+              </mat-form-field>
+        
+              
+          </div>
+          <div class="row">
+            <mat-form-field class="col">
+            <input matInput placeholder="Marca" formControlName="marca">
+            </mat-form-field>
+            <mat-form-field class="col">
+            <input matInput placeholder="Color" formControlName="color">
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="col">
+              <input matInput placeholder="Precio de costo" formControlName="pCosto" required>
+              <span matPrefix>$&nbsp;</span>
+            </mat-form-field>
+            <mat-form-field class="col">
+              <input matInput placeholder="Precio de venta" formControlName="pVenta" required>
+              <span matPrefix>$&nbsp;</span>
+            </mat-form-field>
+          </div>
+    
+        
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Disponibilidad">
+      <div class="modal-body">
+        <div formArrayName="disp">
+          
+          <!-- se itera sobre controls debido a que disp.value no permite editar campos -->
+          <div 
+          class="row" 
+          *ngFor="let item of formNuevoProducto.controls.disp.controls; let i = index"
+          style="margin: 0px">
+
+          <div class="col-sm-3"></div>
+
+          <mat-form-field class="col-sm-3" [formGroupName]="i">
+            <input matInput placeholder="Talle" formControlName="talle" required>
+          </mat-form-field>
+
+          <mat-form-field class="col-sm-3" [formGroupName]="i">
+                <input matInput type="number" placeholder="Cantidad" formControlName="cant" required>
+          </mat-form-field>
+          <div class="col-sm-3"></div>
+            
           </div>
         </div>
-        <div class="row">            
-            <mat-form-field  class="col" >
-              <input matInput placeholder="Prenda" [value]="this.prenda['nombre']" [(ngModel)]="this.prenda['nombre']">
-            </mat-form-field>
-      
-            <mat-form-field  class="col">
-              <input matInput placeholder="Descripcion" [(ngModel)]="this.prenda['descripcion']">
-            </mat-form-field>
-        </div>
-        <div class="row">
-          <mat-form-field class="col">
-          <input matInput placeholder="Marca" [(ngModel)]="this.prenda['marca']">
-          </mat-form-field>
-          <mat-form-field class="col">
-          <input matInput placeholder="Color" [value]="this.prenda['color']" [(ngModel)]="this.prenda['color']">
-          </mat-form-field>
-        </div>
-        <div class="row">
-          <mat-form-field class="col">
-            <input matInput placeholder="Precio de costo">
-            <span matPrefix>$&nbsp;</span>
-          </mat-form-field>
-          <mat-form-field class="col">
-            <input matInput placeholder="Precio de venta" [value]="this.prenda['precio']">
-            <span matPrefix>$&nbsp;</span>
-          </mat-form-field>
-        </div>
+       
+        <button 
+        class="mdc-button" 
+        style="margin-right: 10px"
+        (click)="agregarDisponibilidad()"
+        >Agregar</button>
       </div>
-      <div style="display: flex;justify-content:center; margin-top: 10px">
-        <button class="mdc-button mdc-button--outlined" [mat-dialog-close]="false" style="margin-right: 10px">Cancelar</button>
-        <button class="mdc-button mdc-button--raised"  cdkFocusInitial (click)="closeModal()">Guardar</button>
-      </div>
-    </div>
-
-  </mat-tab>
-  <mat-tab label="Recepción"> </mat-tab>
-  
-</mat-tab-group>
+    </mat-tab>
+    
+  </mat-tab-group>
+</form>
+<div style="display: flex; justify-content:center;">
+  <button 
+    class="mdc-button mdc-button--outlined" 
+    [mat-dialog-close]="false" 
+    style="margin-right: 10px">
+    Cancelar
+  </button>
+  <button 
+    *ngIf="nuevo"
+    class="mdc-button mdc-button--raised"  
+    cdkFocusInitial 
+    (click)="guardarPrenda()">
+    Guardar
+  </button>
+  <button
+    *ngIf="!nuevo"
+    class="mdc-button mdc-button--raised"  
+    cdkFocusInitial 
+    (click)="closeModal()">
+    Guardar
+  </button>
+</div>
