@@ -20,16 +20,3 @@ after_success:
 
 notifications:
   slack: makeit-espacio:ubMTKCxi0L8ihePJmUb1lbrz
-# install:
-#   - npm install -g firebase-tools
-#   - npm install -g @angular/cli
-#
-# jobs:
-#   include:
-#     - stage: test
-#       script: ng test
-# # El build no lo encuentra en deploy stage, tira error      
-#     - stage: build
-#       script: ng build --prod --aot
-#     - stage: deploy
-#       script: firebase deploy --token $FIREBASE_TOKEN
