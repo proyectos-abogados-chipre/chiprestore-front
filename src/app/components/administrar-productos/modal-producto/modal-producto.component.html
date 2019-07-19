@@ -69,7 +69,7 @@
           <!-- se itera sobre controls debido a que disp.value no permite editar campos -->
           <div 
           class="row" 
-          *ngFor="let item of formNuevoProducto.controls.disp.controls; let i = index"
+          *ngFor="let item of formNuevoProducto.controls.disp['controls']; let i = index"
           style="margin: 0px">
 
           <div class="col-sm-3"></div>

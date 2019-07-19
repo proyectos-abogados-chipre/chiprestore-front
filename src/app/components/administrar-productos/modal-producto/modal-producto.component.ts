@@ -32,6 +32,7 @@ export class ModalProductoComponent {
   constructor(private modalRef: MatDialogRef<ModalProductoComponent>,
               private prendasService: PrendasService,
               @Inject(MAT_DIALOG_DATA) private prenda?: any) {
+                console.log(this.formNuevoProducto.controls.disp['controls']);
                 if (this.prenda == null) {
                   this.nuevo = true;
                   this.imgProducto = 'assets/img/add-img.png';
