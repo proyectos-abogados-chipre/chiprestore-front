@@ -30,7 +30,10 @@ import { MatOptionModule,
   MatRadioModule,
   MatChipsModule,
   MatProgressBarModule,
-  MatProgressSpinnerModule} from '@angular/material';
+  MatProgressSpinnerModule,
+  MatSidenavModule,
+  MatAccordion,
+  MatExpansionModule} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -48,6 +51,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     appRoutes,
     ReactiveFormsModule,
     FormsModule,
@@ -62,15 +66,13 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatInputModule,
     MatIconModule,
     MatCardModule,
-    MatGridListModule,
     MatButtonModule,
     MatDialogModule,
     MatTabsModule,
     MatRadioModule,
     MatChipsModule,
-    MatIconModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSidenavModule,
   ],
 // Carga perezosa de un componente, que no es cargado en la plantilla
   entryComponents: [

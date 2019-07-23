@@ -4,11 +4,43 @@ import { FormGroup, FormControl} from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { ModalProductoComponent } from './modal-producto/modal-producto.component';
 import { PrendasService } from 'src/app/services/prendas.service';
+import { animate, trigger, state, style, transition, query, stagger } from '@angular/animations';
 
 @Component({
   selector: 'app-administrar-productos',
   templateUrl: './administrar-productos.component.html',
-  styleUrls: ['./administrar-productos.component.css']
+  styleUrls: ['./administrar-productos.component.css'],
+  animations: [
+    trigger('animationFilter', [
+      transition(':enter', [
+        style({opacity: 0}),
+        animate(200 )
+      ]),
+
+      // fade out when destroyed. this could also be written as transition('void => *')
+      transition(':leave',
+        animate(200, style({opacity: 0})))
+    ]),
+    trigger('imageAnimation', [
+      // this will ignore animations on enter and when there are none to display
+      transition(':enter, * => 0, * => -1', []),
+      transition(':increment', [
+        query(':enter', [
+          style({ opacity: 0, width: '0px' }),
+          stagger(50, [
+            animate('300ms ease-out', style({ opacity: 1, width: '*' })),
+          ]),
+        ])
+      ]),
+      transition(':decrement', [
+        query(':leave', [
+          stagger(50, [
+            animate('300ms ease-out', style({ opacity: 0, width: '0px' })),
+          ]),
+        ])
+      ]),
+    ])
+  ]
 })
 
 export class AdministrarProductosComponent implements OnInit {
@@ -33,6 +65,8 @@ export class AdministrarProductosComponent implements OnInit {
   removable = true;
   loading: boolean;
   visibleFilter: boolean;
+
+ 
 
   constructor(public dialog: MatDialog, private prendasService: PrendasService) {
     this.loading = true;
@@ -94,7 +128,7 @@ export class AdministrarProductosComponent implements OnInit {
     const result = this.prendasService.searchPrendas(this.formPrenda.value);
     this.prendasArray = result;
   }
-
+// agrega un parametro (categoria) al form para buscar un producto
   agregarCategoria() {
     console.log('agregando categoria');
     const tipo = this.formQuery.controls.categoria.value;
@@ -115,6 +149,7 @@ export class AdministrarProductosComponent implements OnInit {
   abrirFiltro() {
     console.log('funca');
   }
+
 }
 
 
