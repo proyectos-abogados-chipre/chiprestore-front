@@ -2,6 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+// Redux
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducerUI } from './ui.reducer';
+
 
 // Components
 import { AppComponent } from './app.component';
@@ -34,8 +42,6 @@ import { MatOptionModule,
   MatSidenavModule,
   MatAccordion,
   MatExpansionModule} from '@angular/material';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -73,6 +79,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatChipsModule,
     MatProgressSpinnerModule,
     MatSidenavModule,
+
+    StoreModule.forRoot({controlerUI: reducerUI}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 10,
+    })
   ],
 // Carga perezosa de un componente, que no es cargado en la plantilla
   entryComponents: [

@@ -6,6 +6,16 @@ import { ModalProductoComponent } from './modal-producto/modal-producto.componen
 import { PrendasService } from 'src/app/services/prendas.service';
 import { animate, trigger, state, style, transition, query, stagger } from '@angular/animations';
 
+// for Redux
+import { Store } from '@ngrx/store';
+import { mostrar, ocultar } from 'src/app/ui.actions';
+import { State } from 'src/app/ui.reducer';
+import { Observable } from 'rxjs';
+
+export interface AppState {
+  visible: boolean;
+}
+
 @Component({
   selector: 'app-administrar-productos',
   templateUrl: './administrar-productos.component.html',
@@ -65,22 +75,44 @@ export class AdministrarProductosComponent implements OnInit {
   removable = true;
   loading: boolean;
   visibleFilter: boolean;
-
- 
-
-  constructor(public dialog: MatDialog, private prendasService: PrendasService) {
+  visibleSidebar: any;
+  // visibleSidebar: Observable<State> = this.store.select(state => state.visible);
+  constructor(public dialog: MatDialog,
+              private prendasService: PrendasService,
+              public store: Store<{visible: boolean}>
+              ) {
     this.loading = true;
     this.visibleFilter = false;
     this.prendasArray = Object.values(this.prendasService.getPrendasEj());
     this.itemsChip = Object.entries(this.formPrenda.value);
     this.prendasService.getPrendas()
       .subscribe( response => {
-        console.log(response);
         this.loading = false;
-      }
-      );
+      });
   }
+
   ngOnInit() {
+    // console.log(this.visibleSidebar);
+    const prop =
+    this.store.select('controlerUI').subscribe(state => {
+      console.log ('recibe: ', state.visible);
+      this.visibleSidebar = state.visible;
+
+      return state.visible;
+    });
+    // console.log(this.visibleSidebar);
+
+    // const getState = store => store.controlerUI;
+    // const getProp = state => state.visible;
+    // const getState = str => str.select('controlerUI');
+    // const getProp = st => st.select('visible');
+    // const prueba = this.store.select(_state => {
+    //   // const _state = getState(_store);
+    //   const _prop = getProp(_state);
+    //   return _state.visible;
+    // });
+    // console.log(prueba);
+
   }
 
 // Transforma el conjunto de prendas recibida como un objeto a un array
@@ -92,7 +124,6 @@ export class AdministrarProductosComponent implements OnInit {
         prendas.push(prenda);
       }
     );
-    console.log(prendas);
     return prendas;
   }
 
@@ -121,6 +152,7 @@ export class AdministrarProductosComponent implements OnInit {
               )
         );
     }
+
 // Realiza un get para obtener los productos filtrados por parametros del form
   buscarProductos() {
     console.log('yendo a buscar');
@@ -128,6 +160,7 @@ export class AdministrarProductosComponent implements OnInit {
     const result = this.prendasService.searchPrendas(this.formPrenda.value);
     this.prendasArray = result;
   }
+
 // agrega un parametro (categoria) al form para buscar un producto
   agregarCategoria() {
     console.log('agregando categoria');
@@ -146,8 +179,17 @@ export class AdministrarProductosComponent implements OnInit {
     console.log(this.itemsChip);
     this.buscarProductos();
   }
-  abrirFiltro() {
-    console.log('funca');
+
+
+  toggleSidebar() {
+    console.log('pre action', this.visibleSidebar);
+    if (!this.visibleSidebar) {
+      this.store.dispatch(mostrar);
+    } else {
+      this.store.dispatch(ocultar);
+    }
+    console.log('post action', this.visibleSidebar);
+
   }
 
 }

@@ -36,15 +36,6 @@ mat-form-field {
     z-index: 2;
 }
 
-@media(max-width: 450px) {
-    .nuevoProducto {
-     bottom: 1.5rem;
-     right: 1.5rem;
-     top: auto
-   }
- }
-
-
  .itemChips {
     background-color: transparent;
     z-index: 1;
@@ -54,6 +45,34 @@ mat-form-field {
     justify-content: center;
     padding-top: 5px;
  }
+ .toggleIcon {
+    cursor: pointer;
+    visibility: hidden
+ }
+ .navbar a {
+    align-items: center;
+}
+.navbar mat-icon {
+    font-size: 30px;
+    display: flex;
+}
+ @media(max-width: 450px) {
+    .nuevoProducto {
+     bottom: 1.5rem;
+     right: 1.5rem;
+     top: auto
+   }
+   .toggleIcon {
+       visibility: visible;
+   }
+  
+
+   .navbar {
+    height: auto!important;
+    padding-bottom: 10px!important;
+   }
+ }
+
  @media (min-width: 1000px){
     .card-columns {
         column-count: 4;

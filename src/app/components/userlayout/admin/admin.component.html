@@ -1,7 +1,7 @@
 <div class="d-flex" >
     <mat-sidenav-container style="width: -webkit-fill-available; height: -webkit-fill-available;">
        
-        <mat-sidenav mode="{{modeSidebar}}" #sidebar [opened]="true">
+        <mat-sidenav mode="{{modeSidebar}}" #sidebar opened="{{ visibleSidebar }}">
             <!-- <div class="side-bar" > -->
                     <app-sidebar></app-sidebar>
             <!-- </div> -->
@@ -14,7 +14,7 @@
 
         </mat-sidenav-content>
     </mat-sidenav-container>
-    <a (click)="sidebar.toggle()" class="buttonToggle">
+    <!-- <a (click)="sidebar.toggle()" class="buttonToggle">
         <mat-icon style="height: 24px; width: 24px;" >list</mat-icon>
-    </a>
+    </a> -->
 </div>
