@@ -2,6 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+// Redux
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducerUI } from './store/ui.reducer';
+
 
 // Components
 import { AppComponent } from './app.component';
@@ -30,9 +38,11 @@ import { MatOptionModule,
   MatRadioModule,
   MatChipsModule,
   MatProgressBarModule,
-  MatProgressSpinnerModule} from '@angular/material';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+  MatProgressSpinnerModule,
+  MatSidenavModule,
+  MatAccordion,
+  MatExpansionModule,
+  MatSnackBarModule} from '@angular/material';
 
 
 @NgModule({
@@ -48,6 +58,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     appRoutes,
     ReactiveFormsModule,
     FormsModule,
@@ -62,19 +73,24 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatInputModule,
     MatIconModule,
     MatCardModule,
-    MatGridListModule,
     MatButtonModule,
     MatDialogModule,
     MatTabsModule,
     MatRadioModule,
     MatChipsModule,
-    MatIconModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSidenavModule,
+    MatSnackBarModule,
+
+
+    StoreModule.forRoot({adminState: reducerUI}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 10,
+    })
   ],
 // Carga perezosa de un componente, que no es cargado en la plantilla
   entryComponents: [
-    ModalProductoComponent
+    ModalProductoComponent,
   ],
 
   providers: [],

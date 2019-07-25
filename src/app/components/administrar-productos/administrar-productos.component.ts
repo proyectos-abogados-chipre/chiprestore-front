@@ -4,11 +4,50 @@ import { FormGroup, FormControl} from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { ModalProductoComponent } from './modal-producto/modal-producto.component';
 import { PrendasService } from 'src/app/services/prendas.service';
+import { animate, trigger, state, style, transition, query, stagger } from '@angular/animations';
+
+// for Redux
+import { Store } from '@ngrx/store';
+import { mostrar, ocultar } from 'src/app/store/ui.actions';
+import { State } from 'src/app/store/ui.reducer';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-administrar-productos',
   templateUrl: './administrar-productos.component.html',
-  styleUrls: ['./administrar-productos.component.css']
+  styleUrls: ['./administrar-productos.component.css'],
+  animations: [
+    trigger('animationFilter', [
+      transition(':enter', [
+        style({opacity: 0}),
+        animate(200 )
+      ]),
+
+      // fade out when destroyed. this could also be written as transition('void => *')
+      transition(':leave',
+        animate(200, style({opacity: 0})))
+    ]),
+    trigger('imageAnimation', [
+      // this will ignore animations on enter and when there are none to display
+      transition(':enter, * => 0, * => -1', []),
+      transition(':increment', [
+        query(':enter', [
+          style({ opacity: 0, width: '0px' }),
+          stagger(50, [
+            animate('300ms ease-out', style({ opacity: 1, width: '*' })),
+          ]),
+        ])
+      ]),
+      transition(':decrement', [
+        query(':leave', [
+          stagger(50, [
+            animate('300ms ease-out', style({ opacity: 0, width: '0px' })),
+          ]),
+        ])
+      ]),
+    ])
+  ]
 })
 
 export class AdministrarProductosComponent implements OnInit {
@@ -33,20 +72,37 @@ export class AdministrarProductosComponent implements OnInit {
   removable = true;
   loading: boolean;
   visibleFilter: boolean;
+  visibleSidebar: any;
+  error: boolean;
+  errorMsj: string;
+  // visibleSidebar: Observable<State> = this.store.select(state => state.visible);
 
-  constructor(public dialog: MatDialog, private prendasService: PrendasService) {
+  constructor(public dialog: MatDialog,
+              private prendasService: PrendasService,
+              public store: Store<{visible: boolean}>
+              ) {}
+
+  ngOnInit() {
     this.loading = true;
     this.visibleFilter = false;
     this.prendasArray = Object.values(this.prendasService.getPrendasEj());
     this.itemsChip = Object.entries(this.formPrenda.value);
     this.prendasService.getPrendas()
-      .subscribe( response => {
-        console.log(response);
-        this.loading = false;
-      }
-      );
-  }
-  ngOnInit() {
+      .subscribe(
+        response => {
+          console.log(response);
+          this.loading = false;
+        },
+        (error: any) => {
+          this.loading = false;
+          this.error = true;
+          this.errorMsj = error.message;
+          this.prendasArray = []; // SOLO EN DESARROLLO, UTILIZADO PARA MOSTRAR ERROR EN REQUEST
+        },
+        );
+    this.store.select('adminState').subscribe(resp => {
+      console.log ('recibe: ', resp);
+    });
   }
 
 // Transforma el conjunto de prendas recibida como un objeto a un array
@@ -58,7 +114,6 @@ export class AdministrarProductosComponent implements OnInit {
         prendas.push(prenda);
       }
     );
-    console.log(prendas);
     return prendas;
   }
 
@@ -87,16 +142,15 @@ export class AdministrarProductosComponent implements OnInit {
               )
         );
     }
+
 // Realiza un get para obtener los productos filtrados por parametros del form
   buscarProductos() {
-    console.log('yendo a buscar');
-    console.log(this.formPrenda.value);
     const result = this.prendasService.searchPrendas(this.formPrenda.value);
     this.prendasArray = result;
   }
 
+// agrega un parametro (categoria) al form para buscar un producto
   agregarCategoria() {
-    console.log('agregando categoria');
     const tipo = this.formQuery.controls.categoria.value;
     const valor = this.formQuery.controls.valor.value;
     this.formPrenda.controls[tipo].setValue(valor);
@@ -106,17 +160,22 @@ export class AdministrarProductosComponent implements OnInit {
 
 // Remueve un matChip
   removerCategoria(categoria: string) {
-    console.log('quitando categoria');
     this.formPrenda.controls[categoria].setValue('');
     this.itemsChip = Object.entries(this.formPrenda.value);
-    console.log(this.itemsChip);
     this.buscarProductos();
   }
-  abrirFiltro() {
-    console.log('funca');
+
+// Abre el sidebar, solo disponible en width < 450px
+  toggleSidebar() {
+      this.store.dispatch(mostrar);
   }
+
 }
 
+
+export interface AppState {
+  visible: boolean;
+}
 
 export interface Producto {
   codigo: string;

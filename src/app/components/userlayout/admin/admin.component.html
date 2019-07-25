@@ -1,16 +1,20 @@
-<div class="d-flex" style="height: -webkit-fill-available; overflow-y: hidden;">
-    <div class="side-bar" >
-        <!-- <div class="sidebar" data-color="danger" data-background-color="white"></div> -->
-        <app-sidebar></app-sidebar>
+<div class="d-flex" >
+    <mat-sidenav-container style="width: -webkit-fill-available; height: -webkit-fill-available;">
+       
+        <mat-sidenav mode="{{modeSidebar}}" #sidebar opened="{{ visibleSidebar }}" (closed)="cierraSidebar()">
+            <!-- <div class="side-bar" > -->
+                    <app-sidebar></app-sidebar>
+            <!-- </div> -->
 
-    </div>
-    <div class="container-fluid" style=" overflow-y: auto; ">
-        <!-- <div class="row" style=" position: -webkit-sticky; position: sticky; top:0px; z-index:2">
-            <app-navbar></app-navbar>
+        </mat-sidenav>
 
-        </div> -->
+        <mat-sidenav-content class="" style=" overflow-y: auto; height: -webkit-fill-available;">
+            
+            <router-outlet></router-outlet>
 
-        <router-outlet></router-outlet>
-
-    </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+    <!-- <a (click)="sidebar.toggle()" class="buttonToggle">
+        <mat-icon style="" >list</mat-icon>
+    </a> -->
 </div>

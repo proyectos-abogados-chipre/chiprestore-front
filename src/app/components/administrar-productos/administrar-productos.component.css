@@ -36,14 +36,20 @@ mat-form-field {
     z-index: 2;
 }
 
-@media(max-width: 450px) {
-    .nuevoProducto {
-     bottom: 1.5rem;
-     right: 1.5rem;
-     top: auto
-   }
- }
-
+.navbar {
+    padding:0; 
+    padding-left:10px; 
+    padding-right: 10px;
+    padding-top: 5px; 
+    top: 5px; 
+    z-index: 1; 
+    height: 3.5rem; 
+    width: -webkit-fill-available; 
+    justify-content: space-between;
+    background-color: darkgray;
+    opacity: 0.90;
+    border-radius: 5px;
+}
 
  .itemChips {
     background-color: transparent;
@@ -54,8 +60,42 @@ mat-form-field {
     justify-content: center;
     padding-top: 5px;
  }
+ .toggleButton {
+    cursor: pointer;
+    visibility: hidden;
+    height: 24px; width: 24px;
+ }
+ .navbar a {
+    align-items: center;
+}
+.navbar mat-icon {
+    font-size: 30px;
+    display: flex;
+    height: auto;
+    width: auto;
+}
+ @media(max-width: 450px) {
+    .nuevoProducto {
+     bottom: 1.5rem;
+     right: 1.5rem;
+     top: auto
+   }
+   .toggleButton {
+       visibility: visible;
+   }
+  
+
+   .navbar {
+    height: auto!important;
+    padding-bottom: 10px!important;
+   }
+ }
+
  @media (min-width: 1000px){
     .card-columns {
         column-count: 4;
     }
  }
+ .mat-simple-snackbar-action {
+    color: sandybrown!important;
+}
