@@ -44,7 +44,8 @@ import { MatOptionModule,
   MatExpansionModule,
   MatSnackBarModule,
   MatMenuModule,
-  MatDividerModule} from '@angular/material';
+  MatDividerModule,
+  MatAutocompleteModule} from '@angular/material';
 
 
 @NgModule({
@@ -86,6 +87,7 @@ import { MatOptionModule,
     MatMenuModule,
     MatExpansionModule,
     MatDividerModule,
+    MatAutocompleteModule,
 
 
     StoreModule.forRoot({adminState: reducerUI}),

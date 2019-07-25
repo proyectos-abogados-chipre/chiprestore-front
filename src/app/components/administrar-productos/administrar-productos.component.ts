@@ -11,6 +11,9 @@ import { Store } from '@ngrx/store';
 import { mostrar, ocultar } from 'src/app/store/ui.actions';
 import { State } from 'src/app/store/ui.reducer';
 import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { Options } from 'selenium-webdriver';
+
 
 
 @Component({
@@ -75,6 +78,14 @@ export class AdministrarProductosComponent implements OnInit {
   visibleSidebar: any;
   error: boolean;
   errorMsj: string;
+  filteredOptions: Observable<string[]>;
+  strAutocomplete = {
+    prenda: [],
+    marca: [],
+    color: [],
+    talle: []
+  };
+
   // visibleSidebar: Observable<State> = this.store.select(state => state.visible);
 
   constructor(public dialog: MatDialog,
@@ -87,22 +98,38 @@ export class AdministrarProductosComponent implements OnInit {
     this.visibleFilter = false;
     this.prendasArray = Object.values(this.prendasService.getPrendasEj());
     this.itemsChip = Object.entries(this.formPrenda.value);
+    // Obtiene todos los productos en un arreglo
     this.prendasService.getPrendas()
       .subscribe(
         response => {
-          console.log(response);
-          this.loading = false;
+          // console.log(response);
         },
         (error: any) => {
-          this.loading = false;
           this.error = true;
           this.errorMsj = error.message;
           this.prendasArray = []; // SOLO EN DESARROLLO, UTILIZADO PARA MOSTRAR ERROR EN REQUEST
         },
+        () => {this.loading = false; }
         );
     this.store.select('adminState').subscribe(resp => {
       console.log ('recibe: ', resp);
     });
+
+    this.agruparCategorias();
+
+    // Observa cambios en el input de busqueda para sugerir palabras
+    this.filteredOptions = this.formQuery.controls.valor.valueChanges
+      .pipe(
+        startWith(''),
+        map( value => {
+          if (this.formQuery.controls.valor.value !== '' &&
+            this.formQuery.controls.categoria.value !== '' &&
+            this.formQuery.controls.categoria.value.toLowerCase() !== 'codigo') {
+            return this.filtro(value);
+          }
+          return undefined;
+        })
+      );
   }
 
 // Transforma el conjunto de prendas recibida como un objeto a un array
@@ -145,6 +172,7 @@ export class AdministrarProductosComponent implements OnInit {
 
 // Realiza un get para obtener los productos filtrados por parametros del form
   buscarProductos() {
+    console.log(this.formPrenda.value);
     const result = this.prendasService.searchPrendas(this.formPrenda.value);
     this.prendasArray = result;
   }
@@ -152,7 +180,7 @@ export class AdministrarProductosComponent implements OnInit {
 // agrega un parametro (categoria) al form para buscar un producto
   agregarCategoria() {
     const tipo = this.formQuery.controls.categoria.value;
-    const valor = this.formQuery.controls.valor.value;
+    const valor = this.formQuery.controls.valor.value.toLowerCase();
     this.formPrenda.controls[tipo].setValue(valor);
     this.itemsChip = Object.entries(this.formPrenda.value);
     this.buscarProductos();
@@ -170,6 +198,32 @@ export class AdministrarProductosComponent implements OnInit {
       this.store.dispatch(mostrar);
   }
 
+  // Filtra todas las sugerencias por parametro obtenido
+  filtro(value: string): string[] {
+    const valueFilter: string = value.toLowerCase();
+    const categoria: string = this.formQuery.controls.categoria.value;
+    return this.strAutocomplete[categoria].filter( arr => arr.includes(valueFilter));
+  }
+
+  // Agrupa en un objeto todas las opciones de cada categoria a sugerir
+  agruparCategorias() {
+    this.prendasArray.forEach(
+      (value: any) => {
+        value.nombre.split(' ').forEach(string => {
+          if (!this.strAutocomplete.prenda.includes(string)) {
+            this.strAutocomplete.prenda.push(string);
+          }
+        });
+        if (!this.strAutocomplete.marca.includes(value.marca)) {
+          this.strAutocomplete.marca.push(value.marca);
+        }
+        if (!this.strAutocomplete.color.includes(value.color)) {
+          this.strAutocomplete.color.push(value.color);
+        }
+      }
+    );
+    this.strAutocomplete.talle = ['xs', 's', 'm', 'l', 'xl'];
+  }
 }
 
 

@@ -28,10 +28,16 @@
                 <mat-option value="talle" > Talle </mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field class="col-sm-6">
+            <mat-form-field class="col-sm-6" >
                 <mat-label>Busqueda</mat-label>
-                <input type="text" matInput formControlName="valor">
-            </mat-form-field>           
+                <input type="text" matInput formControlName="valor" [matAutocomplete]="sugerencias">
+            </mat-form-field>
+            
+            <mat-autocomplete #sugerencias="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
         </form>
         <a (click)="visibleFilter = !visibleFilter"
         style="margin-right: 15px; cursor: pointer; display: flex" 
