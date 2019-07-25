@@ -38,7 +38,7 @@ export class ModalProductoComponent {
   private imgProducto: string = null;
   public nuevo: boolean;
   public tab: number;
-  constructor(private modalRef: MatDialogRef<ModalProductoComponent>,
+  constructor(public modalRef: MatDialogRef<ModalProductoComponent>,
               private prendasService: PrendasService,
               public store: Store<State>,
               private snackbar: MatSnackBar,
