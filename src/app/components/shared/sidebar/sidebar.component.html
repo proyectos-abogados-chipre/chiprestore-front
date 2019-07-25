@@ -7,39 +7,69 @@ height: -webkit-fill-available; overflow: auto; display: flex!important;">
     </div>
     <div class="mdc-drawer__content">
         <nav class="mdc-list">
-            <a class="mdc-list-item " href="#" tabindex="0" aria-selected="true" [routerLink]="['/resume']" routerLinkActive="mdc-list-item--activated">
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">bookmark</i>Resumen
+            <a class="mdc-list-item " tabindex="0" [routerLink]="['/resume']" routerLinkActive="mdc-list-item--activated">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">dashboard</i>
+                Resumen
             </a>
-            <a class="mdc-list-item" href="#" tabindex="-1" [routerLink]="['/marketplaces']" routerLinkActive="mdc-list-item--activated">
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">star</i>Sucursales
+            <a class="mdc-list-item" tabindex="-1" [routerLink]="['/marketplaces']" routerLinkActive="mdc-list-item--activated">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">home</i>
+                Sucursales
             </a>
             <hr class="mdc-list-divider">
             <h6 class="mdc-list-group__subheader">Productos</h6>
-            <a class="mdc-list-item" href="#" tabindex="-1" [routerLink]="['/product/administrate']" routerLinkActive="mdc-list-item--activated">
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">bookmark</i> Administrar
+            <a class="mdc-list-item" tabindex="-1">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">shopping_cart</i> Ventas
             </a>
-            <a class="mdc-list-item" href="#" tabindex="-1">
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">bookmark</i> Alta stock
-            </a>
-            <a class="mdc-list-item" href="#" tabindex="-1">
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">bookmark</i> Movimientos
-            </a>
-            <hr class="mdc-list-divider">
-            <a class="mdc-list-item" href="#" tabindex="-1">
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">bookmark</i> Empleados
-            </a>
-            <hr class="mdc-list-divider">
-            <a class="mdc-list-item" href="#" tabindex="-1">
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">bookmark</i> Mensajes
+            <a class="mdc-list-item" tabindex="-1" [routerLink]="['/product/administrate']" routerLinkActive="mdc-list-item--activated">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">assignment</i> 
+                Administrar
             </a>
 
+            <a class="mdc-list-item" tabindex="-1">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">local_shipping</i> 
+                Movimientos
+            </a>
             <hr class="mdc-list-divider">
-            <a class="mdc-list-item" href="#" tabindex="-1">
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">settings</i> Configuración
+            <a class="mdc-list-item" tabindex="-1">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">people</i> 
+                Empleados
             </a>
-            <a class="mdc-list-item" href="#" tabindex="-1">
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">announcement</i> Ayuda
+            <hr class="mdc-list-divider">
+            <!-- <a class="mdc-list-item" tabindex="-1">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">message</i> 
+                Mensajes
             </a>
+
+            <hr class="mdc-list-divider"> 
+            <a class="mdc-list-item" tabindex="-1">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">settings</i> 
+                Configuración
+            </a>
+            <a class="mdc-list-item" tabindex="-1">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">announcement</i> 
+                Ayuda
+            </a> -->
+            <!-- <a class="mdc-list-item">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">assignment_ind</i>
+                Usuario
+            </a> -->
+            <mat-expansion-panel style="background-color:inherit; color:inherit">
+                    <mat-expansion-panel-header >
+                      <mat-panel-title style="color:white">
+                                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">assignment_ind</i>
+                                    Federico
+                      </mat-panel-title>
+                      
+                    </mat-expansion-panel-header>
+                    <mat-panel-description>
+                        <div style=" display: list-item; color: black; ">
+                            <a >Cambiar contraseña</a>
+                            <mat-divider></mat-divider>
+                            <a >Cerrar sesion</a>             
+                        </div> 
+                    </mat-panel-description>
+                  </mat-expansion-panel>
+
         </nav>
     </div>
 </aside>
