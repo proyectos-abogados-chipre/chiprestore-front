@@ -8,7 +8,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 // Redux
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { reducerUI } from './ui.reducer';
+import { reducerUI } from './store/ui.reducer';
 
 
 // Components
@@ -41,7 +41,8 @@ import { MatOptionModule,
   MatProgressSpinnerModule,
   MatSidenavModule,
   MatAccordion,
-  MatExpansionModule} from '@angular/material';
+  MatExpansionModule,
+  MatSnackBarModule} from '@angular/material';
 
 
 @NgModule({
@@ -79,15 +80,17 @@ import { MatOptionModule,
     MatChipsModule,
     MatProgressSpinnerModule,
     MatSidenavModule,
+    MatSnackBarModule,
 
-    StoreModule.forRoot({controlerUI: reducerUI}),
+
+    StoreModule.forRoot({adminState: reducerUI}),
     StoreDevtoolsModule.instrument({
       maxAge: 10,
     })
   ],
 // Carga perezosa de un componente, que no es cargado en la plantilla
   entryComponents: [
-    ModalProductoComponent
+    ModalProductoComponent,
   ],
 
   providers: [],

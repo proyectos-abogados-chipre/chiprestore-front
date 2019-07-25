@@ -36,6 +36,21 @@ mat-form-field {
     z-index: 2;
 }
 
+.navbar {
+    padding:0; 
+    padding-left:10px; 
+    padding-right: 10px;
+    padding-top: 5px; 
+    top: 5px; 
+    z-index: 1; 
+    height: 3.5rem; 
+    width: -webkit-fill-available; 
+    justify-content: space-between;
+    background-color: darkgray;
+    opacity: 0.90;
+    border-radius: 5px;
+}
+
  .itemChips {
     background-color: transparent;
     z-index: 1;
@@ -45,9 +60,10 @@ mat-form-field {
     justify-content: center;
     padding-top: 5px;
  }
- .toggleIcon {
+ .toggleButton {
     cursor: pointer;
-    visibility: hidden
+    visibility: hidden;
+    height: 24px; width: 24px;
  }
  .navbar a {
     align-items: center;
@@ -55,6 +71,8 @@ mat-form-field {
 .navbar mat-icon {
     font-size: 30px;
     display: flex;
+    height: auto;
+    width: auto;
 }
  @media(max-width: 450px) {
     .nuevoProducto {
@@ -62,7 +80,7 @@ mat-form-field {
      right: 1.5rem;
      top: auto
    }
-   .toggleIcon {
+   .toggleButton {
        visibility: visible;
    }
   
@@ -78,3 +96,6 @@ mat-form-field {
         column-count: 4;
     }
  }
+ .mat-simple-snackbar-action {
+    color: sandybrown!important;
+}

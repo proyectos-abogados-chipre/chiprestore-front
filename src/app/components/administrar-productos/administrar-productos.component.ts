@@ -8,13 +8,10 @@ import { animate, trigger, state, style, transition, query, stagger } from '@ang
 
 // for Redux
 import { Store } from '@ngrx/store';
-import { mostrar, ocultar } from 'src/app/ui.actions';
-import { State } from 'src/app/ui.reducer';
+import { mostrar, ocultar } from 'src/app/store/ui.actions';
+import { State } from 'src/app/store/ui.reducer';
 import { Observable } from 'rxjs';
 
-export interface AppState {
-  visible: boolean;
-}
 
 @Component({
   selector: 'app-administrar-productos',
@@ -76,43 +73,36 @@ export class AdministrarProductosComponent implements OnInit {
   loading: boolean;
   visibleFilter: boolean;
   visibleSidebar: any;
+  error: boolean;
+  errorMsj: string;
   // visibleSidebar: Observable<State> = this.store.select(state => state.visible);
+
   constructor(public dialog: MatDialog,
               private prendasService: PrendasService,
               public store: Store<{visible: boolean}>
-              ) {
+              ) {}
+
+  ngOnInit() {
     this.loading = true;
     this.visibleFilter = false;
     this.prendasArray = Object.values(this.prendasService.getPrendasEj());
     this.itemsChip = Object.entries(this.formPrenda.value);
     this.prendasService.getPrendas()
-      .subscribe( response => {
-        this.loading = false;
-      });
-  }
-
-  ngOnInit() {
-    // console.log(this.visibleSidebar);
-    const prop =
-    this.store.select('controlerUI').subscribe(state => {
-      console.log ('recibe: ', state.visible);
-      this.visibleSidebar = state.visible;
-
-      return state.visible;
+      .subscribe(
+        response => {
+          console.log(response);
+          this.loading = false;
+        },
+        (error: any) => {
+          this.loading = false;
+          this.error = true;
+          this.errorMsj = error.message;
+          this.prendasArray = []; // SOLO EN DESARROLLO, UTILIZADO PARA MOSTRAR ERROR EN REQUEST
+        },
+        );
+    this.store.select('adminState').subscribe(resp => {
+      console.log ('recibe: ', resp);
     });
-    // console.log(this.visibleSidebar);
-
-    // const getState = store => store.controlerUI;
-    // const getProp = state => state.visible;
-    // const getState = str => str.select('controlerUI');
-    // const getProp = st => st.select('visible');
-    // const prueba = this.store.select(_state => {
-    //   // const _state = getState(_store);
-    //   const _prop = getProp(_state);
-    //   return _state.visible;
-    // });
-    // console.log(prueba);
-
   }
 
 // Transforma el conjunto de prendas recibida como un objeto a un array
@@ -155,15 +145,12 @@ export class AdministrarProductosComponent implements OnInit {
 
 // Realiza un get para obtener los productos filtrados por parametros del form
   buscarProductos() {
-    console.log('yendo a buscar');
-    console.log(this.formPrenda.value);
     const result = this.prendasService.searchPrendas(this.formPrenda.value);
     this.prendasArray = result;
   }
 
 // agrega un parametro (categoria) al form para buscar un producto
   agregarCategoria() {
-    console.log('agregando categoria');
     const tipo = this.formQuery.controls.categoria.value;
     const valor = this.formQuery.controls.valor.value;
     this.formPrenda.controls[tipo].setValue(valor);
@@ -173,27 +160,22 @@ export class AdministrarProductosComponent implements OnInit {
 
 // Remueve un matChip
   removerCategoria(categoria: string) {
-    console.log('quitando categoria');
     this.formPrenda.controls[categoria].setValue('');
     this.itemsChip = Object.entries(this.formPrenda.value);
-    console.log(this.itemsChip);
     this.buscarProductos();
   }
 
-
+// Abre el sidebar, solo disponible en width < 450px
   toggleSidebar() {
-    console.log('pre action', this.visibleSidebar);
-    if (!this.visibleSidebar) {
       this.store.dispatch(mostrar);
-    } else {
-      this.store.dispatch(ocultar);
-    }
-    console.log('post action', this.visibleSidebar);
-
   }
 
 }
 
+
+export interface AppState {
+  visible: boolean;
+}
 
 export interface Producto {
   codigo: string;

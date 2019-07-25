@@ -23,20 +23,22 @@
         *ngIf="!nuevo" 
         [src]="formNuevoProducto.controls.img.value" 
         alt="imagen de producto seleccionado"
-        style="">
+        >
 
           
     </div>
   </div>
 <form [formGroup]="formNuevoProducto" >
-  <mat-tab-group >
+  <mat-tab-group [selectedIndex]="tab">
     <mat-tab label="Producto"> 
       <div class="modal-body">       
           <div class="row">            
               <mat-form-field  class="col" >
                 <input matInput placeholder="Prenda" formControlName="prenda" required>
               </mat-form-field>
-        
+              <mat-form-field  class="col" >
+                <input matInput placeholder="Codigo" formControlName="codigo" readonly="true">
+              </mat-form-field>
               
           </div>
           <div class="row">
@@ -100,21 +102,22 @@
   <button 
     class="mdc-button mdc-button--outlined" 
     [mat-dialog-close]="false" 
-    style="margin-right: 10px">
+    style="margin-right: 10px"
+    (click)="modalRef.close(true)">
     Cancelar
   </button>
   <button 
     *ngIf="nuevo"
     class="mdc-button mdc-button--raised"  
     cdkFocusInitial 
-    (click)="guardarPrenda()">
-    Guardar
+    (click)="tab==0? tab = 1: guardarPrenda()">
+    {{tab == 0? 'Siguiente': 'Guardar'}}
   </button>
   <button
     *ngIf="!nuevo"
     class="mdc-button mdc-button--raised"  
     cdkFocusInitial 
-    (click)="closeModal()">
+    (click)="guardarCambios()">
     Guardar
   </button>
 </div>

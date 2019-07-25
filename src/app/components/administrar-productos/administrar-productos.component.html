@@ -1,13 +1,16 @@
-<div class="container" >
+<div class="container">
     <nav 
     class="navbar sticky-top navbar-light bg-light d-flex " 
-    style="padding:0; padding-left:15px; padding-top: 5px; top: 5px; z-index: 1; height: 3.5rem; width: -webkit-fill-available; justify-content: space-between;"
-    >
-        <a class="toggleIcon" (click)="toggleSidebar()">
-            <mat-icon  >list</mat-icon>
-        </a>
+    >   
+        <div class="row">
+            <div class="col-sm-12">
+                <a class="toggleButton" (click)="toggleSidebar()">
+                        <mat-icon>list</mat-icon>
+                </a>
+            </div>
+        </div>  
         <form 
-        class=" align-items-center" 
+        class="row align-items-center" 
         *ngIf="visibleFilter"
         [formGroup]="formQuery"
         [@animationFilter]="visible"
@@ -87,7 +90,11 @@
 
 
 <!-- Informe de resultado vacio -->
-    <div *ngIf="!loading && prendasArray.length == 0" class="alert alert-secondary" role="alert" style="top:15px">
+    <div *ngIf="!loading && prendasArray.length == 0 && !error" class="alert alert-secondary" role="alert" style="top:15px">
         No hay resultados para la busqueda
     </div>
+<!-- Informe error de servicio http -->
+    <div *ngIf="error && prendasArray.length == 0" class="alert alert-danger" role="alert">
+        Error: {{errorMsj}}
+      </div>
 </div>
