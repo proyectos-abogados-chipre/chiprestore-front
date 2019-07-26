@@ -110,7 +110,7 @@ export class AdministrarProductosComponent implements OnInit {
           this.prendasArray = []; // SOLO EN DESARROLLO, UTILIZADO PARA MOSTRAR ERROR EN REQUEST
         },
         () => {this.loading = false; }
-        );
+      );
     this.store.select('adminState').subscribe(resp => {
       console.log ('recibe: ', resp);
     });
@@ -209,9 +209,9 @@ export class AdministrarProductosComponent implements OnInit {
   agruparCategorias() {
     this.prendasArray.forEach(
       (value: any) => {
-        value.nombre.split(' ').forEach(string => {
-          if (!this.strAutocomplete.prenda.includes(string)) {
-            this.strAutocomplete.prenda.push(string);
+        value.nombre.split(' ').forEach(str => {
+          if (!this.strAutocomplete.prenda.includes(str)) {
+            this.strAutocomplete.prenda.push(str);
           }
         });
         if (!this.strAutocomplete.marca.includes(value.marca)) {
