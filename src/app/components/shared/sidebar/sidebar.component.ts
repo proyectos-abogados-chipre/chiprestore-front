@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, State } from '@ngrx/store';
+import { Usuario } from 'src/app/store/ui.reducer';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  public rol: string;
+  public nombre: string;
+  constructor(public store: Store<Usuario>) { }
 
   ngOnInit() {
+    this.store.select('adminState').subscribe( state => {
+      this.nombre = state.usuario.nombre;
+      switch (state.usuario.rol) {
+        case 'administrador':
+          return this.rol = 'administrador';
+        case 'vendedor':
+          return this.rol = 'vendedor';
+      }
+    });
   }
 
 }

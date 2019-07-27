@@ -13,6 +13,7 @@ import { State } from 'src/app/store/ui.reducer';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Options } from 'selenium-webdriver';
+import { AutofillMonitor } from '@angular/cdk/text-field';
 
 
 
@@ -147,9 +148,10 @@ export class AdministrarProductosComponent implements OnInit {
 // Abre la modal para crear un nuevo producto
   nuevoProducto() {
     const modalRef = this.dialog.open(ModalProductoComponent, {
-      width: 'auto',
-      height: '600px',
-      maxHeight: 'calc(100% - 30px)'
+      width: '40rem',
+      height: '90%',
+      maxHeight: 'calc(100% - 30px)',
+      autoFocus: false,
     });
   }
 
@@ -157,9 +159,10 @@ export class AdministrarProductosComponent implements OnInit {
   openModal(prenda: Object) {
     const modalRef = this.dialog.open(ModalProductoComponent,
       {
-        width: 'auto',
-        height: '600px',
+        width: '40rem',
+        height: '90%',
         maxHeight: 'calc(100% - 30px)',
+        autoFocus: false,
         data: prenda
       }).afterClosed()
       .subscribe( response =>

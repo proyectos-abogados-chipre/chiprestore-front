@@ -25,14 +25,14 @@ export class ModalProductoComponent {
     prenda: new FormControl(''),
     marca: new FormControl(''),
     color: new FormControl(''),
-    pCosto: new FormControl(0),
-    pVenta: new FormControl(0),
+    pCosto: new FormControl(),
+    pVenta: new FormControl(),
     img: new FormControl(''),
     disp: new FormArray([
-      new FormGroup({
-        talle: new FormControl(''),
-        cant: new FormControl('0')
-      })
+      // new FormGroup({
+      //   talle: new FormControl(''),
+      //   cant: new FormControl('0')
+      // })
     ])
   });
   private imgProducto: string = null;
@@ -48,6 +48,7 @@ export class ModalProductoComponent {
                 this.tab = 0;
                 if (this.prenda == null) {
                   this.nuevo = true;
+                  this.agregarDisponibilidad();
                   this.imgProducto = 'assets/img/add-img.png';
                 } else {
                   this.setForm();
@@ -92,7 +93,7 @@ export class ModalProductoComponent {
       const dispArray = this.formNuevoProducto.get('disp') as FormArray;
       dispArray.push( new FormGroup({
         talle: new FormControl(''),
-        cant: new FormControl('0')
+        cant: new FormControl('')
         })
       );
     }
