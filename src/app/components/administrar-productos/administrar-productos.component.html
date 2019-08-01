@@ -14,7 +14,6 @@
         *ngIf="visibleFilter"
         [formGroup]="formQuery"
         [@animationFilter]="visible"
-        (ngSubmit)="agregarCategoria()" 
         style="display: flex; margin:0px; justify-content: right; justify-content: flex-end; align-content: center;"
         >
         
@@ -28,7 +27,7 @@
                 <mat-option value="talle" > Talle </mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field class="col-sm-6" >
+            <!-- <mat-form-field class="col-sm-6" >
                 <mat-label>Busqueda</mat-label>
                 <input type="text" matInput formControlName="valor" [matAutocomplete]="sugerencias">
             </mat-form-field>
@@ -37,7 +36,18 @@
                 <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                   {{option}}
                 </mat-option>
-              </mat-autocomplete>
+              </mat-autocomplete> -->
+
+            <app-filtro 
+            class="col-sm-6"
+            [options]="strAutocomplete[formQuery.controls.categoria.value]"
+            [tittle]="'Busqueda'"
+            [type]="'text'"
+            (selected)="formQuery.controls.valor.setValue($event)"
+            (keyEnter)="agregarCategoria()">
+            </app-filtro>
+
+            
         </form>
         <a (click)="visibleFilter = !visibleFilter"
         style="margin-right: 15px; cursor: pointer; display: flex" 

@@ -46,6 +46,7 @@ import { MatOptionModule,
   MatMenuModule,
   MatDividerModule,
   MatAutocompleteModule} from '@angular/material';
+import { FiltroComponent } from './components/shared/filtro/filtro.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { MatOptionModule,
     ResumenComponent,
     AdministrarProductosComponent,
     SucursalesComponent,
-    ModalProductoComponent
+    ModalProductoComponent,
+    FiltroComponent
   ],
   imports: [
     BrowserModule,

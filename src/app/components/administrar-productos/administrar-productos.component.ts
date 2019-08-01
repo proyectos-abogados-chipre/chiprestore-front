@@ -9,11 +9,6 @@ import { animate, trigger, state, style, transition, query, stagger } from '@ang
 // for Redux
 import { Store } from '@ngrx/store';
 import { mostrar, ocultar } from 'src/app/store/ui.actions';
-import { State } from 'src/app/store/ui.reducer';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import { Options } from 'selenium-webdriver';
-import { AutofillMonitor } from '@angular/cdk/text-field';
 
 
 
@@ -79,7 +74,6 @@ export class AdministrarProductosComponent implements OnInit {
   visibleSidebar: any;
   error: boolean;
   errorMsj: string;
-  filteredOptions: Observable<string[]>;
   strAutocomplete = {
     prenda: [],
     marca: [],
@@ -113,24 +107,9 @@ export class AdministrarProductosComponent implements OnInit {
         () => {this.loading = false; }
       );
     this.store.select('adminState').subscribe(resp => {
-      console.log ('recibe: ', resp);
+      // console.log ('recibe: ', resp);
     });
-
     this.agruparCategorias();
-
-    // Observa cambios en el input de busqueda para sugerir palabras
-    this.filteredOptions = this.formQuery.controls.valor.valueChanges
-      .pipe(
-        startWith(''),
-        map( value => {
-          if (this.formQuery.controls.valor.value !== '' &&
-            this.formQuery.controls.categoria.value !== '' &&
-            this.formQuery.controls.categoria.value.toLowerCase() !== 'codigo') {
-            return this.filtro(value);
-          }
-          return undefined;
-        })
-      );
   }
 
 // Transforma el conjunto de prendas recibida como un objeto a un array
@@ -201,14 +180,7 @@ export class AdministrarProductosComponent implements OnInit {
       this.store.dispatch(mostrar);
   }
 
-  // Filtra todas las sugerencias por parametro obtenido
-  filtro(value: string): string[] {
-    const valueFilter: string = value.toLowerCase();
-    const categoria: string = this.formQuery.controls.categoria.value;
-    return this.strAutocomplete[categoria].filter( arr => arr.includes(valueFilter));
-  }
-
-  // Agrupa en un objeto todas las opciones de cada categoria a sugerir
+// Agrupa en un objeto todas las opciones de cada categoria a sugerir
   agruparCategorias() {
     this.prendasArray.forEach(
       (value: any) => {

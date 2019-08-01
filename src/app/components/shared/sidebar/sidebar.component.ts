@@ -16,6 +16,7 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
     this.store.select('adminState').subscribe( state => {
       this.nombre = state.usuario.nombre;
+      this.rol = state.usuario.rol;
       switch (state.usuario.rol) {
         case 'administrador':
           return this.rol = 'administrador';

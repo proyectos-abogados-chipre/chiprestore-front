@@ -65,21 +65,27 @@ height: -webkit-fill-available; overflow: auto; display: flex!important;">
                 Usuario
             </a> -->
             <mat-expansion-panel style="background-color:inherit; color:inherit">
-                    <mat-expansion-panel-header >
-                      <mat-panel-title style="color:white">
-                                    <!-- <i class="material-icons mdc-list-item__graphic" aria-hidden="true">assignment_ind</i> -->
-                                    {{nombre|titlecase}}
-                      </mat-panel-title>
-                      
-                    </mat-expansion-panel-header>
-                    <mat-panel-description>
-                        <div style=" display: list-item; color: black; ">
-                            <a >Cambiar contraseña</a>
-                            <mat-divider></mat-divider>
-                            <a >Cerrar sesion</a>             
-                        </div> 
-                    </mat-panel-description>
-                  </mat-expansion-panel>
+                <mat-expansion-panel-header >
+                        <mat-panel-title style="color:white; font-weight: 500;">
+                                <!-- <i class="material-icons mdc-list-item__graphic" aria-hidden="true">assignment_ind</i> -->
+                                {{nombre|titlecase}}
+                    </mat-panel-title>
+                    
+                </mat-expansion-panel-header>
+                <mat-panel-description style="margin: 0px">
+                    <div style=" display: list-item; color: black; width: 100%">
+                        <!-- <a class="" style="justify-content: center">{{rol|titlecase}}</a> -->
+                        <a class="mdc-list-item" style="justify-content: left; color: black!important; font-weight: 400;">
+                            <!-- <mat-icon style="margin-right: 5px">edit</mat-icon> -->
+                            Cambiar contraseña
+                        </a>
+                        <a class="mdc-list-item" style="justify-content: left; color: black!important; font-weight: 400;">
+                            <mat-icon style="margin-right: 5px">exit_to_app</mat-icon>
+                            Cerrar sesion
+                        </a>             
+                    </div> 
+                </mat-panel-description>
+            </mat-expansion-panel>
 
         </nav>
     </div>
