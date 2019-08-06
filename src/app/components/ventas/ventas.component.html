@@ -17,12 +17,17 @@
         </mat-form-field>
     </div>
 
-    <div>
+    
+  <form [formGroup]="formVenta" >
+
+    <div formArrayName="lineas">
         <table class="table mat-elevation-z8 mt-3">
             <thead>
               <tr>
                 <th scope="col">
-                  <mat-icon>delete</mat-icon>
+                  <a (click)="borrarItems()">
+                    <mat-icon>delete</mat-icon>
+                  </a>
                 </th>
                 <th scope="col">Codigo</th>
                 <th scope="col">Detalle</th>
@@ -34,34 +39,37 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of dataTable">
+              <!-- <tr *ngFor="let item of dataTable"> -->
+              <tr *ngFor="let item of formVenta.controls.lineas['controls']; let i = index">
+              
                 <td>
                     <mat-checkbox></mat-checkbox>
                 </td>
-                <td>{{item.idProducto}}</td>
-                <td>{{item.detalle}}</td>
-                <td>
-                    <mat-select [(value)]="item.talle" #talle>
+                <td>{{item.value.idProducto}}</td>
+                <td>{{item.value.detalle}}</td>
+                <td [formGroupName]="i">
+                    <mat-select 
+                    
+                    formControlName="talle"
+                    #talle>
                         <mat-option>None</mat-option>
                         <mat-option 
-                        *ngFor="let option of item['stock']"
+                        *ngFor="let option of stock[i].disponibilidad"
                         value="{{option.talle}}">
                           {{option.talle | uppercase}}
                         </mat-option>
-                        <!-- <mat-option value="option1">Option 1</mat-option>
-                        <mat-option value="option2">Option 2</mat-option>
-                        <mat-option value="option3">Option 3</mat-option> -->
+
                     </mat-select>
                 </td>
-                <td>
+                <td [formGroupName]="i">
                   <input matInput 
                   type="number" 
-                  [(value)]="item.cantidad"
-                  (keyup.enter)="calcularTotal()"
+                  formControlName="cantidad"
+                  (change)="acumularTotal(item.value.costoU * item.value.cantidad)"
                   style="width: 50px;">
                 </td>
-                <td>{{item.costoU | currency}}</td>
-                <td>{{item.cantidad * item.costoU | currency}}</td>
+                <td>{{item.value.costoU | currency}}</td>
+                <td>{{item.value.cantidad * item.value.costoU | currency}}</td>
 
 
               </tr>
@@ -69,14 +77,14 @@
             </tbody>
           </table>
     </div>
+
     <div class="row">
       <div class="col-12 d-flex justify-content-end">
           <mat-form-field>
-              <input matInput placeholder="Total" disabled #total>
+              <input matInput placeholder="Total" #total formControlName="total" readonly>
             </mat-form-field>
       </div>
     </div>
-    <form [formGroup]="formVenta" >
 
       <div class="row d-flex justify-content-center">
         <!-- <div class="col"> -->
@@ -134,8 +142,8 @@
             </button>
   
           </div>
-        </div>
-    </form>
+      </div>
+  </form>
 
 </div>
 
