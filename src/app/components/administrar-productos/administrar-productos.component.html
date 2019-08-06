@@ -2,13 +2,15 @@
     <nav 
     class="navbar sticky-top navbar-light bg-light d-flex " 
     >   
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-sm-12">
+                
                 <a class="toggleButton" (click)="toggleSidebar()">
                         <mat-icon>list</mat-icon>
                 </a>
             </div>
-        </div>  
+        </div>   -->
+        <app-toggle-sidebar></app-toggle-sidebar>
         <form 
         class="row align-items-center" 
         *ngIf="visibleFilter"

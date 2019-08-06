@@ -5,14 +5,16 @@ import { AdminComponent } from './components/userlayout/admin/admin.component';
 import { ResumenComponent } from './components/resumen/resumen.component';
 import { AdministrarProductosComponent } from './components/administrar-productos/administrar-productos.component';
 import { SucursalesComponent } from './components/sucursales/sucursales.component';
+import { VentasComponent } from './components/ventas/ventas.component';
 
 const routes: Routes = [
     { path: '', component: AdminComponent, children:[
         { path: 'resume', component: ResumenComponent },
         { path: 'marketplaces', component: SucursalesComponent },
-        { path: 'product/administrate', component: AdministrarProductosComponent },
+        { path: 'product/admin', component: AdministrarProductosComponent },
+        {path: 'product/sales', component: VentasComponent},
         // { path: 'product/stock', component: FeatureComponent },
-        { path: '**', redirectTo: '/product/administrate'},
+        { path: '**', redirectTo: '/product/admin'},
 
     ] },
     { path: '**', component: AdminComponent },

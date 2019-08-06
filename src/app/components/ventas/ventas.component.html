@@ -1,0 +1,175 @@
+<div class="container">
+    <nav 
+    class="navbar sticky-top navbar-light bg-light d-flex ">   
+      <app-toggle-sidebar></app-toggle-sidebar>
+          
+      <a (click)="visibleFilter = !visibleFilter"
+      style="margin-right: 15px; cursor: pointer; display: flex; font-size: 12px">
+        <mat-icon  >notifications</mat-icon>
+        Reportar fallo
+      </a>
+    </nav>
+    <div class="d-flex justify-content-center mt-1">
+        <mat-form-field class="col-6">
+            <input matInput 
+            placeholder="Buscar" 
+            [formControl]="formBusqueda"
+            (keyup.enter)="buscarPrenda()">
+        </mat-form-field>
+    </div>
+
+    <div>
+        <table class="table mat-elevation-z8 mt-3">
+            <thead>
+              <tr>
+                <th scope="col">
+                  <mat-icon>delete</mat-icon>
+                </th>
+                <th scope="col">Codigo</th>
+                <th scope="col">Detalle</th>
+                <th scope="col">Talle</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Costo Unitario</th>
+                <th scope="col">Subtotal</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of dataTable">
+                <td>
+                    <mat-checkbox></mat-checkbox>
+                </td>
+                <td>{{item.idProducto}}</td>
+                <td>{{item.detalle}}</td>
+                <td>
+                    <mat-select [(value)]="item.talle" #talle>
+                        <mat-option>None</mat-option>
+                        <mat-option 
+                        *ngFor="let option of item['stock']"
+                        value="{{option.talle}}">
+                          {{option.talle | uppercase}}
+                        </mat-option>
+                        <!-- <mat-option value="option1">Option 1</mat-option>
+                        <mat-option value="option2">Option 2</mat-option>
+                        <mat-option value="option3">Option 3</mat-option> -->
+                    </mat-select>
+                </td>
+                <td>
+                  <input matInput 
+                  type="number" 
+                  [(value)]="item.cantidad"
+                  (keyup.enter)="calcularTotal()"
+                  style="width: 50px;">
+                </td>
+                <td>{{item.costoU | currency}}</td>
+                <td>{{item.cantidad * item.costoU | currency}}</td>
+
+
+              </tr>
+             
+            </tbody>
+          </table>
+    </div>
+    <div class="row">
+      <div class="col-12 d-flex justify-content-end">
+          <mat-form-field>
+              <input matInput placeholder="Total" disabled #total>
+            </mat-form-field>
+      </div>
+    </div>
+    <form [formGroup]="formVenta" >
+
+      <div class="row d-flex justify-content-center">
+        <!-- <div class="col"> -->
+          
+          <div class="col-sm-1"></div>
+          <mat-form-field class="col-sm-3">
+            <mat-label>Medio de pago</mat-label>
+            <mat-select formControlName="medio">
+                <mat-option value="efectivo"> Efectivo </mat-option>
+                <mat-option value="credito"> Credito </mat-option>
+                <mat-option value="debito"> Debito </mat-option>
+
+            </mat-select>
+          </mat-form-field>
+        <!-- </div> -->
+        <!-- <div class="col"sm-> -->
+          <mat-form-field class="col-sm-3">
+              <input matInput 
+              placeholder="Interes de financiamiento (%)" 
+              type="number"
+              [value]="intereses"
+              [readonly]="formVenta.controls.medio.value !== 'credito'">
+          </mat-form-field>
+        <!-- </div> -->
+        <!-- <div class="col"sm-> -->
+            <mat-form-field class="col-sm-2">
+                <input matInput 
+                placeholder="Cuotas" 
+                type="number"
+                formControlName="cuotas"
+                [readonly]="formVenta.controls.medio.value !== 'credito'">
+
+            </mat-form-field>
+        <!-- </div> -->
+        <!-- <div class="col"sm-> -->
+            <mat-form-field class="col-sm-2">
+                <input matInput 
+                placeholder="Valor de cada" 
+                type="number"
+                [readonly]="formVenta.controls.medio.value !== 'credito'">
+                
+              </mat-form-field>
+          <!-- </div> -->
+          <div class="col-sm-1"></div>
+              
+       
+      </div>
+
+      <div class="row">
+          <div class="col-12 d-flex justify-content-center">
+              <button mat-raised-button 
+              color="primary" 
+              (click)="registrarVenta()">
+              Abonar
+            </button>
+  
+          </div>
+        </div>
+    </form>
+
+</div>
+
+    <!-- <div>
+            <mat-table [dataSource]="dataTable" class="mat-elevation-z8 mt-1">
+                    <ng-container matColumnDef="codigo">
+                      <mat-header-cell *matHeaderCellDef> Codigo </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.idProducto}} </mat-cell>
+                    </ng-container>
+                  
+                    <ng-container matColumnDef="detalle">
+                      <mat-header-cell *matHeaderCellDef> Detalle </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.detalle}} </mat-cell>
+                    </ng-container>
+                  
+                    <ng-container matColumnDef="cantidad">
+                      <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> 
+                        <input matInput type="number" value="{{element.cantidad}}">
+                      </mat-cell>
+                    </ng-container>
+                  
+                    <ng-container matColumnDef="costo">
+                      <mat-header-cell *matHeaderCellDef> Costo Unitario </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.costoU}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="subtotal">
+                      <mat-header-cell *matHeaderCellDef> Subtotal </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.cantidad * element.costoU}} </mat-cell>
+                    </ng-container>
+                  
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                  </mat-table>
+
+    </div> -->

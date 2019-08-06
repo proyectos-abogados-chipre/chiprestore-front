@@ -324,23 +324,21 @@ export class PrendasService {
     console.log('entra a buscar');
     const result: Array<object> = [];
 // Declaracion de las coincidencias a verificar
-    const matches = filtro.prenda.split(' ');
     for (const prenda of Object.values(this.prendas)) {
 // Por cada palabra de la categoria prenda del filtro busca coincidencias en el objeto prenda, devuelve true en al menos una coincidencia
       result.push(prenda);
-      let cont = 0;
       let matchCodigo = true;
       let matchNombre = true;
       let matchMarca = true;
       let matchColor = true;
-      if (filtro.codigo !== '' && filtro.codigo !== prenda.codigo) {
+      if (filtro.codigo !== undefined && filtro.codigo !== '' && filtro.codigo !== prenda.codigo) {
         matchCodigo = false;
-        cont = cont + 1;
       }
-      if (filtro.prenda !== '' && filtro.prenda !== prenda.nombre) {
+      if (filtro.prenda !== undefined && filtro.prenda !== '' && filtro.prenda !== prenda.nombre) {
+        const arrMatchNombre = filtro.prenda.split(' ');
         matchNombre = false;
         // tslint:disable-next-line: forin
-        for (const str of matches) {
+        for (const str of arrMatchNombre) {
           const exp = new RegExp(str);
           if (exp.test(prenda.nombre)) {
             matchNombre = true;
@@ -348,16 +346,13 @@ export class PrendasService {
           }
         }
       }
-      if (filtro.marca !== '' && filtro.marca !== prenda.marca) {
+      if (filtro.marca !== undefined && filtro.marca !== '' && filtro.marca !== prenda.marca) {
         matchMarca = false;
-        cont = cont + 1;
       }
-      if (filtro.color !== '' && filtro.color !== prenda.color) {
+      if (filtro.color !== undefined && filtro.color !== '' && filtro.color !== prenda.color) {
         matchColor = false;
-        cont = cont + 1;
       }
       if (!(matchCodigo && matchNombre && matchMarca && matchColor)) {
-        console.log('se elimina uno');
         result.pop();
       }
     }

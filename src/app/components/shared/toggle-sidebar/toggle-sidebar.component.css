@@ -1,0 +1,18 @@
+.toggleButton {
+    cursor: pointer;
+    visibility: hidden;
+    height: 24px; width: 24px;
+ }
+
+
+ @media(max-width: 450px) {
+   .toggleButton {
+       visibility: visible;
+   }
+}
+mat-icon {
+    font-size: 30px!important;
+    display: flex;
+    height: auto;
+    width: auto;
+}

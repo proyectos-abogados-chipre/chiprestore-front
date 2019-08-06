@@ -52,7 +52,7 @@ import { mostrar, ocultar } from 'src/app/store/ui.actions';
 export class AdministrarProductosComponent implements OnInit {
 
 
-  prendasArray: Object[] = [];
+  prendasArray: any[] = [];
 // Parametros de busqueda de productos con reactive forms
   formPrenda = new FormGroup ({
     codigo: new FormControl(''),
@@ -71,7 +71,6 @@ export class AdministrarProductosComponent implements OnInit {
   removable = true;
   loading: boolean;
   visibleFilter: boolean;
-  visibleSidebar: any;
   error: boolean;
   errorMsj: string;
   strAutocomplete = {
@@ -114,7 +113,7 @@ export class AdministrarProductosComponent implements OnInit {
 
 // Transforma el conjunto de prendas recibida como un objeto a un array
   getArray(prendasAsObject) {
-    const prendas: Object[] = [];
+    const prendas: any[] = [];
     Object.keys(prendasAsObject).forEach(
       key => {
         const prenda = prendasAsObject[key];
@@ -135,7 +134,7 @@ export class AdministrarProductosComponent implements OnInit {
   }
 
 // Abre la modal con los datos del producto seleccionado
-  openModal(prenda: Object) {
+  openModal(prenda: any) {
     const modalRef = this.dialog.open(ModalProductoComponent,
       {
         width: '40rem',
@@ -175,10 +174,7 @@ export class AdministrarProductosComponent implements OnInit {
     this.buscarProductos();
   }
 
-// Abre el sidebar, solo disponible en width < 450px
-  toggleSidebar() {
-      this.store.dispatch(mostrar);
-  }
+
 
 // Agrupa en un objeto todas las opciones de cada categoria a sugerir
   agruparCategorias() {

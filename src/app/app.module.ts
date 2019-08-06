@@ -45,8 +45,11 @@ import { MatOptionModule,
   MatSnackBarModule,
   MatMenuModule,
   MatDividerModule,
-  MatAutocompleteModule} from '@angular/material';
+  MatAutocompleteModule,
+  MatCheckboxModule} from '@angular/material';
 import { FiltroComponent } from './components/shared/filtro/filtro.component';
+import { VentasComponent } from './components/ventas/ventas.component';
+import { ToggleSidebarComponent } from './components/shared/toggle-sidebar/toggle-sidebar.component';
 
 
 @NgModule({
@@ -59,7 +62,9 @@ import { FiltroComponent } from './components/shared/filtro/filtro.component';
     AdministrarProductosComponent,
     SucursalesComponent,
     ModalProductoComponent,
-    FiltroComponent
+    FiltroComponent,
+    VentasComponent,
+    ToggleSidebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,6 +95,8 @@ import { FiltroComponent } from './components/shared/filtro/filtro.component';
     MatExpansionModule,
     MatDividerModule,
     MatAutocompleteModule,
+    MatTableModule,
+    MatCheckboxModule,
 
 
     StoreModule.forRoot({adminState: reducerUI}),

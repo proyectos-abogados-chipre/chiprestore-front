@@ -26,10 +26,11 @@ height: -webkit-fill-available; overflow: auto; display: flex!important;">
             </a>
             <hr class="mdc-list-divider">
             <h6 class="mdc-list-group__subheader">Productos</h6>
-            <a class="mdc-list-item" tabindex="-1">
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">shopping_cart</i> Ventas
+            <a class="mdc-list-item" tabindex="-1" [routerLink]="['/product/sales']" routerLinkActive="mdc-list-item--activated">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">shopping_cart</i> 
+                Ventas
             </a>
-            <a class="mdc-list-item" tabindex="-1" [routerLink]="['/product/administrate']" routerLinkActive="mdc-list-item--activated">
+            <a class="mdc-list-item" tabindex="-1" [routerLink]="['/product/admin']" routerLinkActive="mdc-list-item--activated">
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">assignment</i> 
                 Administrar
             </a>
