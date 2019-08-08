@@ -1,4 +1,7 @@
-<div class="container">
+<mat-progress-bar mode="indeterminate" *ngIf="loading" style="z-index: 3; top: 0px; position: fixed!important;"></mat-progress-bar>
+
+<div class="container" style="padding-bottom: 15px; top: 5px">
+
     <nav 
     class="navbar sticky-top navbar-light bg-light d-flex ">   
       <app-toggle-sidebar></app-toggle-sidebar>
@@ -16,16 +19,21 @@
             (keyup.enter)="buscarPrenda()">
         </mat-form-field>
     </div>
-
+    
+<!-- Informe de resultado vacio -->
+<div *ngIf="noResult" class="alert alert-secondary" role="alert" style="top:15px">
+  No hay resultados para la busqueda
+</div>
     
   <form [formGroup]="formVenta" >
 
-    <div formArrayName="lineas">
+    <div formArrayName="lineas" class="lineas">
         <table class="table mat-elevation-z8 mt-3">
             <thead>
               <tr>
-                <th scope="col">
-                  <a (click)="borrarItems()">
+                <th scope="col" >
+                  <a (click)="borrarItems()"
+                  style="cursor: pointer">
                     <mat-icon>delete</mat-icon>
                   </a>
                 </th>
@@ -38,12 +46,29 @@
 
               </tr>
             </thead>
-            <tbody>
-              <!-- <tr *ngFor="let item of dataTable"> -->
+            <tbody *ngIf="formVenta.controls.lineas.value.length == 0">
+              <tr>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+
+
+
+              </tr>
+            </tbody>
+            <tbody *ngIf="formVenta.controls.lineas.value.length > 0">
               <tr *ngFor="let item of formVenta.controls.lineas['controls']; let i = index">
               
                 <td>
-                    <mat-checkbox></mat-checkbox>
+                    <mat-checkbox 
+                    (change)="checkbox.checked == true? 
+                              agregarSeleccionado(formVenta.controls.lineas.value[i]) : 
+                              quitarSeleccionado(formVenta.controls.lineas.value[i])" 
+                    #checkbox></mat-checkbox>
                 </td>
                 <td>{{item.value.idProducto}}</td>
                 <td>{{item.value.detalle}}</td>
@@ -81,7 +106,8 @@
     <div class="row">
       <div class="col-12 d-flex justify-content-end">
           <mat-form-field>
-              <input matInput placeholder="Total" #total formControlName="total" readonly>
+              <input matInput placeholder="Total" #total formControlName="montoNeto" readonly>
+              <span matPrefix>$&nbsp;</span>
             </mat-form-field>
       </div>
     </div>
@@ -92,40 +118,35 @@
           <div class="col-sm-1"></div>
           <mat-form-field class="col-sm-3">
             <mat-label>Medio de pago</mat-label>
-            <mat-select formControlName="medio">
+            <mat-select formControlName="medioPago">
                 <mat-option value="efectivo"> Efectivo </mat-option>
                 <mat-option value="credito"> Credito </mat-option>
                 <mat-option value="debito"> Debito </mat-option>
 
             </mat-select>
           </mat-form-field>
-        <!-- </div> -->
-        <!-- <div class="col"sm-> -->
           <mat-form-field class="col-sm-3">
               <input matInput 
+              formControlName="intereses"
               placeholder="Interes de financiamiento (%)" 
               type="number"
-              [value]="intereses"
-              [readonly]="formVenta.controls.medio.value !== 'credito'">
+              [readonly]="formVenta.controls.medioPago.value !== 'credito'">
           </mat-form-field>
-        <!-- </div> -->
-        <!-- <div class="col"sm-> -->
             <mat-form-field class="col-sm-2">
                 <input matInput 
-                placeholder="Cuotas" 
+                formControlName="nroCuotas"
+                placeholder="Cuotas"
                 type="number"
-                formControlName="cuotas"
-                [readonly]="formVenta.controls.medio.value !== 'credito'">
+                [readonly]="formVenta.controls.medioPago.value !== 'credito'">
 
             </mat-form-field>
-        <!-- </div> -->
-        <!-- <div class="col"sm-> -->
             <mat-form-field class="col-sm-2">
                 <input matInput 
-                placeholder="Valor de cada" 
+                formControlName = "valorCuota"
+                placeholder="Valor de cada"
                 type="number"
-                [readonly]="formVenta.controls.medio.value !== 'credito'">
-                
+                readonly>
+                <span matPrefix>$&nbsp;</span>
               </mat-form-field>
           <!-- </div> -->
           <div class="col-sm-1"></div>
@@ -137,10 +158,11 @@
           <div class="col-12 d-flex justify-content-center">
               <button mat-raised-button 
               color="primary" 
-              (click)="registrarVenta()">
+              (click)="registrarVenta()"
+              style="width: 170px">
               Abonar
+             
             </button>
-  
           </div>
       </div>
   </form>

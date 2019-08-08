@@ -19,7 +19,7 @@ export class PrendasService {
       pVenta: 500.00,
       disp: [
         {talle: 's', cant: 3},
-        {talle: 'm', cant: 2},
+        {talle: 'L', cant: 2},
         {talle: 'xxl', cant: 1}
       ]
     },

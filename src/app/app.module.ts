@@ -97,6 +97,7 @@ import { ToggleSidebarComponent } from './components/shared/toggle-sidebar/toggl
     MatAutocompleteModule,
     MatTableModule,
     MatCheckboxModule,
+    MatProgressBarModule,
 
 
     StoreModule.forRoot({adminState: reducerUI}),

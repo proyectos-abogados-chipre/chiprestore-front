@@ -5,8 +5,23 @@ import { startWith, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-filtro',
-  templateUrl: './filtro.component.html',
-  styleUrls: ['./filtro.component.css']
+  template: `
+  <mat-form-field>
+    <mat-label>{{tittle}}</mat-label>
+    <input
+    type="{{type}}"
+    matInput
+    [formControl]="input"
+    [matAutocomplete]="sugerencias"
+    (keyup.enter)="this.keyEnter.emit(true);">
+  </mat-form-field>
+
+  <mat-autocomplete #sugerencias="matAutocomplete">
+    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+      {{option}}
+    </mat-option>
+  </mat-autocomplete>`,
+  styles: [``]
 })
 export class FiltroComponent implements OnInit {
   @Input() type: string;
