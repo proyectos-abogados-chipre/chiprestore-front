@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject  } from '@angular/core';
-import {FormControlName, FormGroup, FormControl, FormArray} from '@angular/forms';
+import {FormGroup, FormArray, FormBuilder} from '@angular/forms';
 
 
 import { MatDialogRef } from '@angular/material/dialog';
@@ -18,43 +18,51 @@ import { addProducto } from 'src/app/store/ui.actions';
   templateUrl: './modal-producto.component.html',
   styleUrls: ['./modal-producto.component.css']
 })
-export class ModalProductoComponent {
-// Datos del Reactive form
-  formNuevoProducto = new FormGroup ({
-    codigo: new FormControl(''),
-    prenda: new FormControl(''),
-    marca: new FormControl(''),
-    color: new FormControl(''),
-    pCosto: new FormControl(),
-    pVenta: new FormControl(),
-    img: new FormControl(''),
-    disp: new FormArray([
-      // new FormGroup({
-      //   talle: new FormControl(''),
-      //   cant: new FormControl('0')
-      // })
-    ])
-  });
+export class ModalProductoComponent implements OnInit{
+
+  public formNuevoProducto: FormGroup;
+  public stock: FormGroup;
   private imgProducto: string = null;
   public nuevo: boolean;
   public tab: number;
-  constructor(public modalRef: MatDialogRef<ModalProductoComponent>,
+
+  constructor(private fbuilder: FormBuilder,
               private prendasService: PrendasService,
               public store: Store<State>,
               private snackbar: MatSnackBar,
+              public modalRef: MatDialogRef<ModalProductoComponent>,
               @Inject(MAT_DIALOG_DATA) private prenda?: any
-              ) {
-                // console.log(this.formNuevoProducto.controls.disp['controls']);
-                this.tab = 0;
-                if (this.prenda == null) {
-                  this.nuevo = true;
-                  this.agregarDisponibilidad();
-                  this.imgProducto = 'assets/img/add-img.png';
-                } else {
-                  this.setForm();
-                  this.nuevo = false;
-                }
-              }
+              ) {}
+
+  ngOnInit(): void {
+    this.initFormProducto();
+    this.tab = 0;
+    if (this.prenda == null) {
+      this.nuevo = true;
+      this.imgProducto = 'assets/img/add-img.png';
+    } else {
+      this.setForm();
+      this.nuevo = false;
+    }
+  }
+
+  initFormProducto() {
+// Datos del Reactive form
+    this.formNuevoProducto = this.fbuilder.group ({
+      codigo: '',
+      prenda: '',
+      marca: '',
+      color: '',
+      pCosto: undefined,
+      pVenta: undefined,
+      img: '',
+      disp: this.fbuilder.array([])
+    });
+    this.stock = this.fbuilder.group({
+      talle: undefined,
+      cantidad: undefined
+    });
+  }
 // Guarda la nueva prenda mediante un metodo post sobre el servicio de prendas
     guardarPrenda() {
       // this.guardarImg(); // Para almacenar la imagen en back-end
@@ -91,9 +99,9 @@ export class ModalProductoComponent {
 // Agrega una linea de stock --> {talle, cantidad}
     agregarDisponibilidad() {
       const dispArray = this.formNuevoProducto.get('disp') as FormArray;
-      dispArray.push( new FormGroup({
-        talle: new FormControl(''),
-        cant: new FormControl('')
+      dispArray.push( this.fbuilder.group({
+        talle: this.stock.controls.talle.value,
+        cant: this.stock.controls.cantidad.value
         })
       );
     }
@@ -110,9 +118,10 @@ export class ModalProductoComponent {
       this.prenda.disp.forEach(articulo => {
         const disp = this.formNuevoProducto.get('disp') as FormArray;
         disp.push(
-          new FormGroup({
-            talle: new FormControl(articulo.talle),
-            cant: new FormControl(articulo.cant)})
+          this.fbuilder.group({
+            talle: articulo.talle,
+            cant: articulo.cant
+          })
         );
       });
       console.log(this.formNuevoProducto.value);

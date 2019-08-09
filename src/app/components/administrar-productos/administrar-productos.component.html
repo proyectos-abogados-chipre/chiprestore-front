@@ -1,7 +1,7 @@
 <mat-progress-bar mode="indeterminate" *ngIf="loading" style="z-index: 3; top: 0px; position: fixed!important;"></mat-progress-bar>
 <div class="container">
     <nav 
-    class="navbar sticky-top navbar-light bg-light d-flex " 
+    class="navbar sticky-top navbar-light bg-light d-flex align-content-center" 
     >   
         <!-- <div class="row">
             <div class="col-sm-12">
@@ -17,7 +17,7 @@
         *ngIf="visibleFilter"
         [formGroup]="formQuery"
         [@animationFilter]="visible"
-        style="display: flex; margin:0px; justify-content: right; justify-content: flex-end; align-content: center;"
+        style="display: flex; margin:0px; justify-content: right; justify-content: flex-end; align-content: center; padding-top: 10px"
         >
         
             <mat-form-field class="col-sm-3">
@@ -43,6 +43,7 @@
 
             <app-filtro 
             class="col-sm-6"
+            style="padding: 0px; margin-left: 1%; margin-right: 1%"
             [options]="strAutocomplete[formQuery.controls.categoria.value]"
             [tittle]="'Busqueda'"
             [type]="'text'"
@@ -52,12 +53,15 @@
 
             
         </form>
-        <a (click)="visibleFilter = !visibleFilter"
-        style="margin-right: 15px; cursor: pointer; display: flex" 
-        >
-            <mat-icon  >filter_list</mat-icon>
-            Filtrar
-        </a>
+        <div>
+            <a (click)="visibleFilter = !visibleFilter"
+            style="margin-right: 15px; cursor: pointer; display: flex" 
+            >
+                <mat-icon  >filter_list</mat-icon>
+                Filtrar
+            </a>
+        </div>
+        
     </nav>
 
 
@@ -91,17 +95,23 @@
 
 
 <!-- Resultados de la busqueda o todos -->
+    <div *ngIf="!loading" class="row">
+        <div class="col">
+            <p style="font-size: 12px; color: darkgray; margin: 0px">Mostrando añadidos recientemente</p>
+        </div>
+    </div>
     <div *ngIf="!loading" class="card-columns">
+        
         <mat-card class="card" *ngFor="let prenda of prendasArray" style="margin-top: 10px; margin-bottom: 10px;" [@animationFilter]="visible">
 
             <img mat-card-image src="{{prenda['img']}}">
-            <mat-card-content>
+            <mat-card-content style="margin-bottom: 0%">
                 <p style="font-size: 12px;">
                     {{prenda['nombre']|titlecase}} {{prenda['marca']|titlecase}} {{prenda['pVenta']|currency}}
                 </p>
             </mat-card-content>
             <mat-card-actions>
-                <button class="mdc-button mdc-button--raised" (click)="openModal(prenda)">Ver mas</button>
+                <button  mat-flat-button style="background-color: var(--mdc-theme-primary); color: white" (click)="openModal(prenda)">Ver mas</button>
                 
             </mat-card-actions>
         </mat-card>

@@ -34,6 +34,10 @@ height: -webkit-fill-available; overflow: auto; display: flex!important;">
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">assignment</i> 
                 Administrar
             </a>
+            <a class="mdc-list-item" tabindex="-1" *ngIf="rol == 'administrador'" href="https://chiprestore.com/admin/login">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">local_mall</i> 
+                Tienda
+            </a>
 
             <a class="mdc-list-item" tabindex="-1" *ngIf="rol == 'administrador'">
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">local_shipping</i> 

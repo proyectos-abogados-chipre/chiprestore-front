@@ -15,7 +15,7 @@
 .modal-body{
     padding: 0px;
     display: inline-block; 
-    width: 100%;  
+    width: 96%;  
     align-self: center; 
     margin-top: 10px; 
     /* overflow: auto; */
@@ -34,3 +34,14 @@ img{
         width: 100%;
    }
  }
+
+ th {
+    color: rgba(0, 0, 0, 0.54)
+ }
+ table {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+ }
+tr th:first-child, tr td:first-child {
+    padding-left: 40px
+}

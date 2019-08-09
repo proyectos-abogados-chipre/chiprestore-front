@@ -6,7 +6,7 @@ import { startWith, map } from 'rxjs/operators';
 @Component({
   selector: 'app-filtro',
   template: `
-  <mat-form-field>
+  <mat-form-field style="width: -webkit-fill-available">
     <mat-label>{{tittle}}</mat-label>
     <input
     type="{{type}}"

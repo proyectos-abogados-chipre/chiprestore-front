@@ -1,10 +1,10 @@
 import { Component, OnInit} from '@angular/core';
-import { FormGroup, FormControl} from '@angular/forms';
+import { FormGroup, FormBuilder} from '@angular/forms';
 
 import { MatDialog } from '@angular/material';
 import { ModalProductoComponent } from './modal-producto/modal-producto.component';
 import { PrendasService } from 'src/app/services/prendas.service';
-import { animate, trigger, state, style, transition, query, stagger } from '@angular/animations';
+import { animate, trigger, style, transition, query, stagger } from '@angular/animations';
 
 // for Redux
 import { Store } from '@ngrx/store';
@@ -54,18 +54,9 @@ export class AdministrarProductosComponent implements OnInit {
 
   prendasArray: any[] = [];
 // Parametros de busqueda de productos con reactive forms
-  formPrenda = new FormGroup ({
-    codigo: new FormControl(''),
-    prenda: new FormControl(''),
-    marca: new FormControl(''),
-    color: new FormControl(''),
-    talle: new FormControl(''),
-  });
+  formPrenda: FormGroup;
 // Filtro con el que se completa los parametros de busqueda
-  formQuery = new FormGroup({
-    categoria: new FormControl(''),
-    valor: new FormControl(''),
-  });
+  formQuery: FormGroup;
 
   itemsChip = [];
   removable = true;
@@ -84,12 +75,14 @@ export class AdministrarProductosComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
               private prendasService: PrendasService,
-              public store: Store<{visible: boolean}>
+              public store: Store<{visible: boolean}>,
+              private fbuilder: FormBuilder
               ) {}
 
   ngOnInit() {
     this.loading = true;
     this.visibleFilter = false;
+    this.initForms();
     this.prendasArray = Object.values(this.prendasService.getPrendasEj());
     this.itemsChip = Object.entries(this.formPrenda.value);
     // Obtiene todos los productos en un arreglo
@@ -109,6 +102,20 @@ export class AdministrarProductosComponent implements OnInit {
       // console.log ('recibe: ', resp);
     });
     this.agruparCategorias();
+  }
+
+  initForms() {
+    this.formPrenda = this.fbuilder.group ({
+      codigo: '',
+      prenda: '',
+      marca: '',
+      color: '',
+      talle: '',
+    });
+    this.formQuery = this.fbuilder.group({
+      categoria: '',
+      valor: '',
+    });
   }
 
 // Transforma el conjunto de prendas recibida como un objeto a un array
@@ -153,7 +160,6 @@ export class AdministrarProductosComponent implements OnInit {
 
 // Realiza un get para obtener los productos filtrados por parametros del form
   buscarProductos() {
-    console.log(this.formPrenda.value);
     const result = this.prendasService.searchPrendas(this.formPrenda.value);
     this.prendasArray = result;
   }
