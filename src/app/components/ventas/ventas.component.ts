@@ -29,12 +29,12 @@ export class VentasComponent implements OnInit {
 
   ngOnInit() {
     this.initFormVenta();
-    this.formVenta.controls.intereses.valueChanges.subscribe(
-      () => this.calcularMonto()
-    );
-    this.formVenta.controls.nroCuotas.valueChanges.subscribe(
-      () => this.calcularMonto()
-    );
+    // this.formVenta.controls.intereses.valueChanges.subscribe(
+    //   () => this.calcularMonto()
+    // );
+    // this.formVenta.controls.nroCuotas.valueChanges.subscribe(
+    //   () => this.calcularMonto()
+    // );
   }
 
   initFormVenta() {
@@ -102,6 +102,7 @@ export class VentasComponent implements OnInit {
   quitarSeleccionado(item: any) {
     const index = this.selectedToDelete.indexOf(item);
     this.selectedToDelete.splice(index, 1);
+    this.stock.splice(index, 1);
   }
   borrarItems() {
     if (this.selectedToDelete.length > 0) {
@@ -115,27 +116,30 @@ export class VentasComponent implements OnInit {
 
 // Calcula el monto final a pagar de acuerdo a la forma de pago
   calcularMonto() {
-    switch (this.formVenta.value.medioPago) {
-      case 'efectivo': {
-        this.formVenta.controls.nroCuotas.setValue(0);
-        break;
-      }
-      case 'debito': {
-        this.formVenta.controls.nroCuotas.setValue(0);
-        break;
-      }
-      case 'credito': {
-        const aumento = this.formVenta.controls.montoNeto.value * (this.formVenta.controls.intereses.value / 100);
-        const varMontoFinal = this.formVenta.controls.montoNeto.value + aumento;
-        const varValorCuota = varMontoFinal / this.formVenta.controls.nroCuotas.value;
-        this.formVenta.patchValue({
-          montoFinal: varMontoFinal,
-          valorCuota: varValorCuota,
+    console.log(this.formVenta.value);
+    if (this.formVenta.value.medioPago !== undefined) {
+      switch (this.formVenta.value.medioPago) {
+        case 'efectivo': {
+          this.formVenta.controls.nroCuotas.setValue(0);
+          break;
+        }
+        case 'debito': {
+          this.formVenta.controls.nroCuotas.setValue(0);
+          break;
+        }
+        case 'credito': {
+          const aumento = this.formVenta.controls.montoNeto.value * (this.formVenta.controls.intereses.value / 100);
+          const varMontoFinal = this.formVenta.controls.montoNeto.value + aumento;
+          const varValorCuota = varMontoFinal / this.formVenta.controls.nroCuotas.value;
+          this.formVenta.patchValue({
+            montoFinal: varMontoFinal,
+            valorCuota: varValorCuota,
 
-        });
-        break;
-      }
+          });
+          break;
+        }
 
+      }
     }
   }
 
@@ -146,13 +150,18 @@ export class VentasComponent implements OnInit {
       .subscribe(
         resp => {
           this.formVenta.reset();
+          const formArray = this.formVenta.controls.lineas as FormArray;
+          while (this.formVenta.controls.lineas.value.length > 0) {
+            formArray.removeAt(formArray.value.length - 1);
+          }
+          this.stock = [];
           this.snackbar.open('Venta registrada con exito', 'Aceptar', {
-            duration: 1000,
+            duration: 3000,
           });
         },
         err => {
           this.snackbar.open('Problema al registrar', 'Reintentar', {
-            duration: 2000,
+            duration: 3000,
           });
         },
         () => this.loading = false

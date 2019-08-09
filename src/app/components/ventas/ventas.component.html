@@ -128,6 +128,7 @@
           <mat-form-field class="col-sm-3">
               <input matInput 
               formControlName="intereses"
+              (change)="calcularMonto()"
               placeholder="Interes de financiamiento (%)" 
               type="number"
               [readonly]="formVenta.controls.medioPago.value !== 'credito'">
@@ -135,6 +136,7 @@
             <mat-form-field class="col-sm-2">
                 <input matInput 
                 formControlName="nroCuotas"
+                (change)="calcularMonto()"
                 placeholder="Cuotas"
                 type="number"
                 [readonly]="formVenta.controls.medioPago.value !== 'credito'">
