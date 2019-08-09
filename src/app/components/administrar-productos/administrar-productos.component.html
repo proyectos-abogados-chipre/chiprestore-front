@@ -1,3 +1,4 @@
+<mat-progress-bar mode="indeterminate" *ngIf="loading" style="z-index: 3; top: 0px; position: fixed!important;"></mat-progress-bar>
 <div class="container">
     <nav 
     class="navbar sticky-top navbar-light bg-light d-flex " 
@@ -84,9 +85,9 @@
 
 
 <!-- Spinner loading -->
-    <div *ngIf="loading" class="d-flex justify-content-center" style="margin-top: 30%">
+    <!-- <div *ngIf="loading" class="d-flex justify-content-center" style="margin-top: 30%">
         <mat-spinner ></mat-spinner>
-    </div>
+    </div> -->
 
 
 <!-- Resultados de la busqueda o todos -->
