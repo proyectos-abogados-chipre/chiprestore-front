@@ -102,7 +102,6 @@ export class VentasComponent implements OnInit {
   quitarSeleccionado(item: any) {
     const index = this.selectedToDelete.indexOf(item);
     this.selectedToDelete.splice(index, 1);
-    this.stock.splice(index, 1);
   }
   borrarItems() {
     if (this.selectedToDelete.length > 0) {
@@ -110,7 +109,11 @@ export class VentasComponent implements OnInit {
       for (const item of this.selectedToDelete) {
         const index = lineas.value.indexOf(item);
         lineas.removeAt(index);
+        this.stock.splice(index, 1);
+
+
       }
+      this.calcularMonto();
     }
   }
 

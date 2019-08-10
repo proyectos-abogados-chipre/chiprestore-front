@@ -74,7 +74,6 @@
                 <td>{{item.value.detalle}}</td>
                 <td [formGroupName]="i">
                     <mat-select 
-                    
                     formControlName="talle"
                     #talle>
                         <mat-option>None</mat-option>
@@ -95,8 +94,6 @@
                 </td>
                 <td>{{item.value.costoU | currency}}</td>
                 <td>{{item.value.cantidad * item.value.costoU | currency}}</td>
-
-
               </tr>
              
             </tbody>
