@@ -104,7 +104,7 @@
         
         <mat-card class="card" *ngFor="let prenda of prendasArray" style="margin-top: 10px; margin-bottom: 10px;" [@animationFilter]="visible">
 
-            <img mat-card-image src="{{prenda['img']}}">
+            <img mat-card-image src="{{prenda['img'][0]}}">
             <mat-card-content style="margin-bottom: 0%">
                 <p style="font-size: 12px;">
                     {{prenda['nombre']|titlecase}} {{prenda['marca']|titlecase}} {{prenda['pVenta']|currency}}

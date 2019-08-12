@@ -9,6 +9,7 @@ import { animate, trigger, style, transition, query, stagger } from '@angular/an
 // for Redux
 import { Store } from '@ngrx/store';
 import { mostrar, ocultar } from 'src/app/store/ui.actions';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 
 
@@ -70,16 +71,27 @@ export class AdministrarProductosComponent implements OnInit {
     color: [],
     talle: []
   };
+  heigthModal: string;
 
   // visibleSidebar: Observable<State> = this.store.select(state => state.visible);
 
   constructor(public dialog: MatDialog,
               private prendasService: PrendasService,
               public store: Store<{visible: boolean}>,
-              private fbuilder: FormBuilder
+              private fbuilder: FormBuilder,
+              public breakpointObserver: BreakpointObserver
               ) {}
 
   ngOnInit() {
+    this.breakpointObserver
+    .observe(['(min-width: 450px)'])
+    .subscribe((state: BreakpointState) => {
+      if (state.matches) {
+        this.heigthModal = '75%';
+      } else {
+        this.heigthModal = '90%';
+      }
+    });
     this.loading = true;
     this.visibleFilter = false;
     this.initForms();
@@ -133,8 +145,8 @@ export class AdministrarProductosComponent implements OnInit {
 // Abre la modal para crear un nuevo producto
   nuevoProducto() {
     const modalRef = this.dialog.open(ModalProductoComponent, {
-      width: '40rem',
-      height: '90%',
+      // width: '40rem',
+      height: this.heigthModal,
       maxHeight: 'calc(100% - 30px)',
       autoFocus: false,
     });
@@ -144,8 +156,8 @@ export class AdministrarProductosComponent implements OnInit {
   openModal(prenda: any) {
     const modalRef = this.dialog.open(ModalProductoComponent,
       {
-        width: '40rem',
-        height: '90%',
+        // width: '40rem',
+        height: this.heigthModal,
         maxHeight: 'calc(100% - 30px)',
         autoFocus: false,
         data: prenda

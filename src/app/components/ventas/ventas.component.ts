@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { VentasService } from 'src/app/services/ventas.service';
 import { PrendasService } from 'src/app/services/prendas.service';
-import { FormControl, FormGroup, FormArray, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Usuario } from 'src/app/store/ui.reducer';
 import { MatSnackBar } from '@angular/material';
@@ -41,12 +41,12 @@ export class VentasComponent implements OnInit {
     const fecha = new Date();
     this.formVenta = this.fbuilder.group({
       lineas: this.fbuilder.array([]),
-      montoNeto: 0,
-      medioPago: undefined,
-        montoFinal: 0,
-        intereses: 0,
-        nroCuotas: 0,
-        valorCuota: undefined,
+      montoNeto: [0, Validators.required],
+      medioPago: [undefined, Validators.required],
+        montoFinal: [0, Validators.required],
+        intereses: [0],
+        nroCuotas: [0],
+        valorCuota: [undefined],
       fecha: fecha.toLocaleDateString(),
       idUsuario: undefined,
       sucursal: undefined,
@@ -67,8 +67,8 @@ export class VentasComponent implements OnInit {
       const linea = this.fbuilder.group({
         idProducto: result.codigo,
         detalle: result.nombre + ' ' + result.marca,
-        talle: undefined,
-        cantidad: 0,
+        talle: [undefined, Validators.required],
+        cantidad: [0, Validators.required],
         costoU: result.pVenta,
       });
       const formLinea = this.formVenta.get('lineas') as FormArray;

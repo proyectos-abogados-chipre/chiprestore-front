@@ -1,168 +1,206 @@
 <form [formGroup]="formNuevoProducto">
-  <div class="row" style="margin-top: 0px; margin-bottom: 0px">
-    <div class="col" style="text-align: center">
-        <a 
-        *ngIf="nuevo"
-        (click)="inputImg.click()"
-        style="cursor:pointer ">
+  <div class="modalBody">
+    <div class="row" style="margin-top: 0px; margin-bottom: 0px">
+      <div class="col" style="text-align: center; align-self: center">
+        <div class="">
           <img
-          class="uploadImg"
+          *ngIf="formNuevoProducto.controls.img.value.length == 0"
+          class=""
           src="{{imgProducto}}" 
           alt=""
           style="width: 200px; height: auto"
           id="frame"
           >
-        </a>
-        <input type="file" 
-        #inputImg 
-        (change)="seleccionarImg($event)" 
-        style="display: none"
-        capture>
-
-        <img mat-card-image 
-        class="imgProducto"
-        *ngIf="!nuevo" 
-        [src]="formNuevoProducto.controls.img.value" 
-        alt="imagen de producto seleccionado"
-        >
-
-          
-    </div>
-  </div>
-
-  <mat-tab-group [(selectedIndex)]="tab">
-
-    <mat-tab label="Detalles"> 
-      <div class="modal-body">       
-          <div class="row">            
-              <mat-form-field  class="col" >
-                <input matInput placeholder="Prenda" formControlName="prenda" required>
-              </mat-form-field>
-              <mat-form-field  class="col" *ngIf="!nuevo">
-                <input matInput placeholder="Codigo" formControlName="codigo" readonly="true">
-              </mat-form-field>
-              
-          </div>
-          <div class="row">
-            <mat-form-field class="col">
-            <input matInput placeholder="Marca" formControlName="marca">
-            </mat-form-field>
-            <mat-form-field class="col">
-            <input matInput placeholder="Color" formControlName="color">
-            </mat-form-field>
-          </div>
-          <div class="row">
-            <mat-form-field class="col">
-              <input matInput type="number" placeholder="Precio de costo" formControlName="pCosto" required>
-              <span matPrefix>$&nbsp;</span>
-            </mat-form-field>
-            <mat-form-field class="col">
-              <input matInput type="number" placeholder="Precio de venta" formControlName="pVenta" required>
-              <span matPrefix>$&nbsp;</span>
-            </mat-form-field>
-          </div>
-    
-        
-      </div>
-    </mat-tab>
-
-    <mat-tab label="Disponibilidad">
-      <div class="modal-body">
-        <div formArrayName="disp">
-
-          <div [formGroup]="stock" class="row" style="display: flex; justify-content: center">
-              <mat-form-field class="col-sm-3">
-                <input matInput placeholder="Talle" formControlName="talle" required>
-              </mat-form-field>
-  
-              <mat-form-field class="col-sm-3">
-                <input matInput type="number" placeholder="Cantidad" formControlName="cantidad" required>
-              </mat-form-field>
-              <div class="col-sm-3 align-self-center">
-                <button 
-                mat-raised-button
-                style="color: var(--mdc-theme-secondary)"
-                (click)="agregarDisponibilidad()"
-                >Agregar</button>
-              </div>
-          </div>
-          
-
-
-          <div class="row"  style="display: flex; justify-content: center; overflow: auto">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Talle</th>
-                  <th>Cantidad</th>
-                  <th>
-                    <a><mat-icon>delete</mat-icon></a>
-                  </th>
-                </tr>
-              </thead>
-
-              <tbody *ngIf="formNuevoProducto.controls.disp.value.length > 0">
-                <tr *ngFor="let item of formNuevoProducto.controls.disp['controls']; let i = index">
-                  <td>{{item.value.talle}}</td>
-                  <td>{{item.value.cant}}</td>
-                  <td>
-                    <mat-checkbox></mat-checkbox>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-
-         
-          <!-- se itera sobre controls debido a que disp.value no permite editar campos -->
-            <!-- <div 
-            class="row" 
-            *ngFor="let item of formNuevoProducto.controls.disp['controls']; let i = index"
-            style="margin: 0px; display: flex; justify-content: center">
-
-
-              <mat-form-field class="col-sm-3" [formGroupName]="i">
-                <input matInput placeholder="Talle" formControlName="talle" required>
-              </mat-form-field>
-
-              <mat-form-field class="col-sm-3" [formGroupName]="i">
-                <input matInput type="number" placeholder="Cantidad" formControlName="cant" required>
-              </mat-form-field>
-              
-            </div> -->
         </div>
+        <input type="file" 
+          #inputImg 
+          (change)="seleccionarImg($event)" 
+          style="display: none"
+          capture>
+          
+          <div *ngIf="formNuevoProducto.controls.img.value.length>0" id="carousel-productos" class="carousel slide" data-ride="carousel" >
+              <div class="carousel-inner">
+               
+                <div *ngFor="let source of formNuevoProducto.controls.img.value; let i=index" 
+                class="carousel-item" 
+                [ngClass]="{'active': i==0}">
+                  <img
+                    class="imgProducto"
+                    
+                    [src]="source|domseguro" 
+                    
+                    >
+                    <!-- <p>{{source}}</p> -->
+                </div>
+                
+              </div>
+              <a class="carousel-control-prev" href="#carousel-productos" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carousel-productos" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+      <div class="d-flex">
         
-        
+   
+          <button class="buttonAddImg" mat-mini-fab style="" (click)="inputImg.click()">+</button>
       </div>
-    </mat-tab>
-    
-  </mat-tab-group>
+           
+      </div>
+    </div>
+    <div class="">
+      <mat-tab-group [(selectedIndex)]="tab" style="height: 90%; " mat-align-tabs="center">
 
-  
-  <div style="display: flex; justify-content:center;">
-    <button 
-      mat-raised-button
+        <mat-tab label="Detalles"> 
+          <div class="modal-body">       
+              <div class="row">            
+                  <mat-form-field  class="col" >
+                    <input matInput placeholder="Prenda" formControlName="prenda" required>
+                  </mat-form-field>
+                  <mat-form-field  class="col" *ngIf="!nuevo">
+                    <input matInput placeholder="Codigo" formControlName="codigo" readonly="true">
+                  </mat-form-field>
+                  
+              </div>
+              <div class="row">            
+                  <mat-form-field  class="col" >
+                    <input matInput placeholder="Categoria">
+                  </mat-form-field>
+                  <mat-form-field  class="col">
+                    <input matInput placeholder="Descripcion">
+                  </mat-form-field>
+                  
+              </div>
+              <div class="row">
+                <mat-form-field class="col">
+                <input matInput placeholder="Marca" formControlName="marca">
+                </mat-form-field>
+                <mat-form-field class="col">
+                <input matInput placeholder="Color" formControlName="color">
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field class="col">
+                  <input matInput type="number" placeholder="Precio de costo" formControlName="pCosto" required>
+                  <span matPrefix>$&nbsp;</span>
+                </mat-form-field>
+                <mat-form-field class="col">
+                  <input matInput type="number" placeholder="Precio de venta" formControlName="pVenta" required>
+                  <span matPrefix>$&nbsp;</span>
+                </mat-form-field>
+              </div>
+        
+            
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Disponibilidad">
+          <div class="modal-body">
+            <div formArrayName="disp">
+
+              <div [formGroup]="stock" class="row">
+                  <mat-form-field class="col">
+                    <input matInput placeholder="Talle" formControlName="talle" required>
+                  </mat-form-field>
       
+                  <mat-form-field class="col">
+                    <input matInput type="number" placeholder="Cantidad" formControlName="cantidad" required>
+                  </mat-form-field>
+                  
+              </div>
+              <div class="row" style="margin-top: -3%; margin-bottom: 2%">
+                  <div class="col d-flex justify-content-end">
+                      <button 
+                      mat-raised-button
+                      style="color: var(--mdc-theme-secondary)"
+                      (click)="agregarDisponibilidad()"
+                      >Agregar</button>
+                    </div>
+              </div>
+              
 
-      [mat-dialog-close]="false" 
-      style="margin-right: 10px; color: var(--mdc-theme-secondary)"
-      (click)="modalRef.close(true)">
-      Cancelar
-    </button>
-    <button 
-      *ngIf="nuevo"
-      mat-flat-button
-      style="background-color:  var(--mdc-theme-secondary); color:white"
-      (click)="tab==0? tab = 1: guardarPrenda()">
-      {{tab == 0? 'Siguiente': 'Guardar'}}
-    </button>
-    <button
-      *ngIf="!nuevo"
-      mat-flat-button
-      style="background-color:  var(--mdc-theme-secondary); color:white"
-      (click)="guardarCambios()">
-      Guardar
-    </button>
+
+              <div class="row"  style="display: flex; justify-content: center; overflow: auto">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Talle</th>
+                      <th>Cantidad</th>
+                      <th>
+                        <a><mat-icon>delete</mat-icon></a>
+                      </th>
+                    </tr>
+                  </thead>
+
+                  <tbody *ngIf="formNuevoProducto.controls.disp.value.length > 0">
+                    <tr *ngFor="let item of formNuevoProducto.controls.disp['controls']; let i = index">
+                      <td>{{item.value.talle}}</td>
+                      <td>{{item.value.cant}}</td>
+                      <td>
+                        <mat-checkbox></mat-checkbox>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+
+            
+
+            </div>
+            
+            
+          </div>
+        </mat-tab>
+        
+      </mat-tab-group>
+
+      
+      <div style="display: flex; justify-content:center;">
+        <button 
+          mat-raised-button
+          
+
+          [mat-dialog-close]="false" 
+          style="margin-right: 10px; color: var(--mdc-theme-secondary)"
+          (click)="modalRef.close(true)">
+          Cancelar
+        </button>
+        <button 
+          *ngIf="nuevo"
+          mat-flat-button
+          style="background-color:  var(--mdc-theme-secondary); color:white"
+          (click)="tab==0? tab = 1: guardarPrenda()">
+          {{tab == 0? 'Siguiente': 'Guardar'}}
+        </button>
+        <button
+          *ngIf="!nuevo"
+          mat-flat-button
+          style="background-color:  var(--mdc-theme-secondary); color:white"
+          (click)="guardarCambios()">
+          Guardar
+        </button>
+      </div>
+  </div>
   </div>
 </form>
+
+              <!-- se itera sobre controls debido a que disp.value no permite editar campos -->
+                <!-- <div 
+                class="row" 
+                *ngFor="let item of formNuevoProducto.controls.disp['controls']; let i = index"
+                style="margin: 0px; display: flex; justify-content: center">
+
+
+                  <mat-form-field class="col-sm-3" [formGroupName]="i">
+                    <input matInput placeholder="Talle" formControlName="talle" required>
+                  </mat-form-field>
+
+                  <mat-form-field class="col-sm-3" [formGroupName]="i">
+                    <input matInput type="number" placeholder="Cantidad" formControlName="cant" required>
+                  </mat-form-field>
+                  
+                </div> -->

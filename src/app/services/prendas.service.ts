@@ -14,7 +14,7 @@ export class PrendasService {
       color: 'azul',
 
       codigo: '1',
-      img: `/assets/img/img1.png`,
+      img: [`/assets/img/img1.png`],
       pCosto: 300.00,
       pVenta: 500.00,
       disp: [
@@ -29,7 +29,7 @@ export class PrendasService {
       color: 'salmon',
 
       codigo: '2',
-      img: `/assets/img/img2.png`,
+      img: [`/assets/img/img2.png`],
       pCosto: 300.00,
       pVenta: 500.00,
       disp: [
@@ -44,7 +44,7 @@ export class PrendasService {
       color: 'blanca',
 
       codigo: '3',
-      img: `/assets/img/img3.png`,
+      img: [`/assets/img/img3.png`],
       pCosto: 300.00,
       pVenta: 500.00,
       disp: [
@@ -59,7 +59,7 @@ export class PrendasService {
       color: 'naranja',
 
       codigo: '4',
-      img: `/assets/img/img4.png`,
+      img: [`/assets/img/img4.png`],
       pCosto: 300.00,
       pVenta: 500.00,
       disp: [
@@ -74,7 +74,7 @@ export class PrendasService {
       color: 'roja',
 
       codigo: '5',
-      img: `/assets/img/img5.png`,
+      img: [`/assets/img/img5.png`],
       pCosto: 300.00,
       pVenta: 500.00,
       disp: [
@@ -89,7 +89,7 @@ export class PrendasService {
       color: 'amarillo',
 
       codigo: '6',
-      img: `/assets/img/img6.png`,
+      img: [`/assets/img/img6.png`],
       pCosto: 300.00,
       pVenta: 500.00,
       disp: [
@@ -104,7 +104,7 @@ export class PrendasService {
       color: 'celeste',
 
       codigo: '7',
-      img: `/assets/img/img7.png`,
+      img: [`/assets/img/img7.png`],
       pCosto: 300.00,
       pVenta: 500.00,
       disp: [
@@ -119,7 +119,7 @@ export class PrendasService {
       color: 'gris',
 
       codigo: '8',
-      img: `/assets/img/img8.png`,
+      img: [`/assets/img/img8.png`],
       pCosto: 300.00,
       pVenta: 500.00,
       disp: [
@@ -134,7 +134,7 @@ export class PrendasService {
       color: 'gris blanco rojo negro',
 
       codigo: '9',
-      img: `/assets/img/img9.png`,
+      img: [`/assets/img/img9.png`],
       pCosto: 300.00,
       pVenta: 500.00,
       disp: [
@@ -149,7 +149,7 @@ export class PrendasService {
       color: 'rosa',
 
       codigo: '10',
-      img: `/assets/img/img10.png`,
+      img: [`/assets/img/img10.png`],
       pCosto: 300.00,
       pVenta: 500.00,
       disp: [
@@ -164,7 +164,7 @@ export class PrendasService {
       color: 'roja',
 
       codigo: '11',
-      img: `/assets/img/img11.png`,
+      img: [`/assets/img/img11.png`],
       pCosto: 300.00,
       pVenta: 500.00,
       disp: [
@@ -179,7 +179,7 @@ export class PrendasService {
       color: 'rosado',
 
       codigo: '12',
-      img: `/assets/img/img12.png`,
+      img: [`/assets/img/img12.png`],
       pCosto: 300.00,
       pVenta: 500.00,
       disp: [
@@ -194,7 +194,7 @@ export class PrendasService {
       color: 'azul',
 
       codigo: '13',
-      img: `/assets/img/img13.png`,
+      img: [`/assets/img/img13.png`],
       pCosto: 300.00,
       pVenta: 500.00,
       disp: [
@@ -209,7 +209,7 @@ export class PrendasService {
       color: 'blanca',
 
       codigo: '14',
-      img: `/assets/img/img14.png`,
+      img: [`/assets/img/img14.png`],
       pCosto: 300.00,
       pVenta: 500.00,
       disp: [
@@ -223,7 +223,7 @@ export class PrendasService {
       color: 'azul',
 
       codigo: '15',
-      img: `/assets/img/img15.png`,
+      img: [`/assets/img/img15.png`],
       pCosto: 300.00,
       pVenta: 500.00,
       disp: [
@@ -236,7 +236,7 @@ export class PrendasService {
       color: 'negro',
 
       codigo: '16',
-      img: `/assets/img/img16.png`,
+      img: [`/assets/img/img16.png`],
       pCosto: 300.00,
       pVenta: 500.00,
       disp: [
@@ -250,7 +250,7 @@ export class PrendasService {
       color: 'negro',
 
       codigo: '17',
-      img: `/assets/img/img17.png`,
+      img: [`/assets/img/img17.png`],
       pCosto: 300.00,
       pVenta: 500.00,
       disp: [
@@ -264,7 +264,7 @@ export class PrendasService {
       color: 'marron',
 
       codigo: '18',
-      img: `/assets/img/img18.png`,
+      img: [`/assets/img/img18.png`],
       pCosto: 300.00,
       pVenta: 500.00,
       disp: [
@@ -277,7 +277,7 @@ export class PrendasService {
       color: 'gris',
 
       codigo: '19',
-      img: `/assets/img/img19.png`,
+      img: [`/assets/img/img19.png`],
       pCosto: 300.00,
       pVenta: 500.00,
       disp: [
@@ -290,7 +290,7 @@ export class PrendasService {
       color: 'azul',
 
       codigo: '20',
-      img: `/assets/img/img20.png`,
+      img: [`/assets/img/img20.png`],
       pCosto: 300.00,
       pVenta: 500.00,
       disp: [

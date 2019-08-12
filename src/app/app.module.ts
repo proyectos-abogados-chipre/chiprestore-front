@@ -50,6 +50,7 @@ import { MatOptionModule,
 import { FiltroComponent } from './components/shared/filtro/filtro.component';
 import { VentasComponent } from './components/ventas/ventas.component';
 import { ToggleSidebarComponent } from './components/shared/toggle-sidebar/toggle-sidebar.component';
+import { DomseguroPipe } from './pipes/domseguro.pipe';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { ToggleSidebarComponent } from './components/shared/toggle-sidebar/toggl
     FiltroComponent,
     VentasComponent,
     ToggleSidebarComponent,
+    DomseguroPipe,
   ],
   imports: [
     BrowserModule,

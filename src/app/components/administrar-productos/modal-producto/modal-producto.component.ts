@@ -12,6 +12,7 @@ import { PrendasService } from 'src/app/services/prendas.service';
 import { State } from 'src/app/store/ui.reducer';
 import { Store } from '@ngrx/store';
 import { addProducto } from 'src/app/store/ui.actions';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-modal-producto',
@@ -31,6 +32,7 @@ export class ModalProductoComponent implements OnInit{
               public store: Store<State>,
               private snackbar: MatSnackBar,
               public modalRef: MatDialogRef<ModalProductoComponent>,
+              private sanitizer: DomSanitizer,
               @Inject(MAT_DIALOG_DATA) private prenda?: any
               ) {}
 
@@ -39,7 +41,7 @@ export class ModalProductoComponent implements OnInit{
     this.tab = 0;
     if (this.prenda == null) {
       this.nuevo = true;
-      this.imgProducto = 'assets/img/add-img.png';
+      this.imgProducto = 'assets/img/noimage.jpg';
     } else {
       this.setForm();
       this.nuevo = false;
@@ -55,7 +57,7 @@ export class ModalProductoComponent implements OnInit{
       color: '',
       pCosto: undefined,
       pVenta: undefined,
-      img: '',
+      img: this.fbuilder.array([]),
       disp: this.fbuilder.array([])
     });
     this.stock = this.fbuilder.group({
@@ -112,7 +114,12 @@ export class ModalProductoComponent implements OnInit{
       this.formNuevoProducto.controls.prenda.setValue(this.prenda.nombre);
       this.formNuevoProducto.controls.marca.setValue(this.prenda.marca);
       this.formNuevoProducto.controls.color.setValue(this.prenda.color);
-      this.formNuevoProducto.controls.img.setValue(this.prenda.img);
+      // ITERAAAAAARRRR
+      //
+      //
+      //
+      const imgs = this.formNuevoProducto.controls.img as FormArray;
+      imgs.push(this.fbuilder.control(this.prenda.img[0]));
       this.formNuevoProducto.controls.pCosto.setValue(this.prenda.pCosto);
       this.formNuevoProducto.controls.pVenta.setValue(this.prenda.pVenta);
       this.prenda.disp.forEach(articulo => {
@@ -124,16 +131,18 @@ export class ModalProductoComponent implements OnInit{
           })
         );
       });
-      console.log(this.formNuevoProducto.value);
     }
 
 // Guarda los datos de la imagen seleccionada
     seleccionarImg(event) {
-      const frame = document.getElementById('frame');
-      this.formNuevoProducto.controls.img.setValue(event.target.files[0]);
-      console.log(this.formNuevoProducto.controls.img.value);
-      frame['src'] = URL.createObjectURL(event.target.files[0]);
-      // this.imgProducto = URL.createObjectURL(event.target.files[0]);
+      if (event.target.files[0] != null) {
+        const frame = document.getElementById('frame');
+        const imgs = this.formNuevoProducto.controls.img as FormArray;
+        const newImg = URL.createObjectURL(event.target.files[0]);
+        imgs.push(this.fbuilder.control(newImg));
+        // frame['src'] = URL.createObjectURL(event.target.files[0]);
+        // this.imgProducto = URL.createObjectURL(event.target.files[0]);
+      }
     }
 
 // Guardar cambios en producto registrado
