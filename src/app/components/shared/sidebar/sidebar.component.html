@@ -84,7 +84,10 @@ height: -webkit-fill-available; overflow: auto; display: flex!important;">
                             <!-- <mat-icon style="margin-right: 5px">edit</mat-icon> -->
                             Cambiar contraseña
                         </a>
-                        <a class="mdc-list-item" style="justify-content: left; color: black!important; font-weight: 400;">
+                        <a 
+                        (click)="cerrarSesion()"
+                        class="mdc-list-item" 
+                        style="justify-content: left; color: black!important; font-weight: 400;">
                             <mat-icon style="margin-right: 5px">exit_to_app</mat-icon>
                             Cerrar sesion
                         </a>             

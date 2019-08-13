@@ -1,5 +1,5 @@
 import { Action, createAction } from '@ngrx/store';
-import { typeMostrar, typeOcultar, typeAddproduct, typeLogin } from './ui.actions';
+import { typeMostrar, typeOcultar, typeAddproduct, typeLogin, typeLogout } from './ui.actions';
 import { Producto } from '../components/administrar-productos/administrar-productos.component';
 
 // Actions
@@ -24,10 +24,10 @@ export const initialState: State = {
     producto: undefined,
     // Momentaneo hasta desarrollar api de login
     usuario: {
-        userID: 40752791,
-        nombre: 'federico samaniego',
-        rol: 'administrador',
-        sucursal: 0
+        userID: undefined,
+        nombre: undefined,
+        rol: undefined,
+        sucursal: undefined,
     },
 };
 
@@ -72,6 +72,17 @@ export function reducerUI(state = initialState, action: any /* Action */ ): Stat
                     rol: action.rol,
                     sucursal: action.sucursal
                 }
+            };
+        }
+        case typeLogout: {
+            return {
+                ...state,
+                usuario:  {
+                    userID: undefined,
+                    nombre: undefined,
+                    rol: undefined,
+                    sucursal: undefined,
+                },
             };
         }
         default: {

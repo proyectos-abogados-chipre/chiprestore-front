@@ -5,8 +5,8 @@ import { Usuario } from './ui.reducer';
 export const typeMostrar = '[navbar toggle-sidebar] visible';
 export const typeOcultar = '[sidebar toggle-sidebar] hidden';
 export const typeAddproduct = '[administrar registrar] agregar';
-export const typeLogin = '[component login] iniciarSesion';
-export const typeLogout = '[component logout] cerrarSesion';
+export const typeLogin = '[loginComponent login] iniciarSesion';
+export const typeLogout = '[sidebar logout] cerrarSesion';
 
 export const mostrar: Action = {
     type: typeMostrar

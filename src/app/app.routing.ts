@@ -6,9 +6,11 @@ import { ResumenComponent } from './components/resumen/resumen.component';
 import { AdministrarProductosComponent } from './components/administrar-productos/administrar-productos.component';
 import { SucursalesComponent } from './components/sucursales/sucursales.component';
 import { VentasComponent } from './components/ventas/ventas.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
-    { path: '', component: AdminComponent, children:[
+    {path: 'login', component: LoginComponent},
+    { path: '', component: AdminComponent, children: [
         { path: 'resume', component: ResumenComponent },
         { path: 'marketplaces', component: SucursalesComponent },
         { path: 'product/admin', component: AdministrarProductosComponent },
@@ -17,7 +19,8 @@ const routes: Routes = [
         { path: '**', redirectTo: '/product/admin'},
 
     ] },
-    { path: '**', component: AdminComponent },
+    {path: '**', component: LoginComponent}
+    // { path: '**', component: AdminComponent },
 
     //{ path: 'path/:routeParam', component: MyComponent },
     //{ path: 'staticPath', component: ... },

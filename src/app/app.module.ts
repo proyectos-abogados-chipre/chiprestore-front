@@ -51,6 +51,7 @@ import { FiltroComponent } from './components/shared/filtro/filtro.component';
 import { VentasComponent } from './components/ventas/ventas.component';
 import { ToggleSidebarComponent } from './components/shared/toggle-sidebar/toggle-sidebar.component';
 import { DomseguroPipe } from './pipes/domseguro.pipe';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import { DomseguroPipe } from './pipes/domseguro.pipe';
     VentasComponent,
     ToggleSidebarComponent,
     DomseguroPipe,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

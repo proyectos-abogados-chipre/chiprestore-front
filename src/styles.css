@@ -79,3 +79,6 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
     /* overflow: hidden; */
 }
+button:focus {
+    outline: none
+}
