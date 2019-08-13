@@ -149,5 +149,8 @@ export class ModalProductoComponent implements OnInit{
   guardarCambios() {
     console.log('cambios en un producto');
   }
+  eliminarImg(index) {
+    console.log(index);
+  }
 
 }
