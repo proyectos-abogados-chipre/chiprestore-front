@@ -16,12 +16,13 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.name = '';
     this.password = '';
+    console.log('usuario: federicosamaniego');
+    console.log('contraseña: 1234');
   }
   iniciarSesion() {
-    console.log(this.name);
     const valid = this.userService.login(this.name, this.password);
     if (valid) {
-      this.route.navigate(['product/admin']);
+      this.route.navigate(['admin']);
     }
   }
 }

@@ -29,7 +29,6 @@ export class UsuarioService {
     //   );
 
 
-    console.log(user, password);
     if ( user === 'federicosamaniego' && password === '1234') {
       this.store.dispatch(iniciarSesion({
         userID: 40752791,
