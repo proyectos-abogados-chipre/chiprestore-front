@@ -10,7 +10,7 @@ height: -webkit-fill-available; overflow: auto; display: flex!important;">
             <a class="mdc-list-item"
             *ngIf="rol == 'administrador'"
             tabindex="0" 
-            [routerLink]="['/resume']" 
+            [routerLink]="['/admin/resume']" 
             routerLinkActive="mdc-list-item--activated">
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">dashboard</i>
                 Resumen
@@ -19,18 +19,18 @@ height: -webkit-fill-available; overflow: auto; display: flex!important;">
             *ngIf="rol == 'administrador'"
             class="mdc-list-item" 
             tabindex="-1" 
-            [routerLink]="['/marketplaces']" 
+            [routerLink]="['/admin/marketplaces']" 
             routerLinkActive="mdc-list-item--activated">
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">home</i>
                 Sucursales
             </a>
             <hr class="mdc-list-divider">
             <h6 class="mdc-list-group__subheader">Productos</h6>
-            <a class="mdc-list-item" tabindex="-1" [routerLink]="['/product/sales']" routerLinkActive="mdc-list-item--activated">
+            <a class="mdc-list-item" tabindex="-1" [routerLink]="['/admin/product/sales']" routerLinkActive="mdc-list-item--activated">
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">shopping_cart</i> 
                 Ventas
             </a>
-            <a class="mdc-list-item" tabindex="-1" [routerLink]="['/product/admin']" routerLinkActive="mdc-list-item--activated">
+            <a class="mdc-list-item" tabindex="-1" [routerLink]="['/admin/product/manage']" routerLinkActive="mdc-list-item--activated">
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">assignment</i> 
                 Administrar
             </a>
