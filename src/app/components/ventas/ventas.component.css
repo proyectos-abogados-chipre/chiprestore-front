@@ -15,6 +15,9 @@
 .navbar a {
     align-items: center;
 }
+.buttonVender {
+    width: 170px
+}
 
  @media(max-width: 450px) {
     .nuevoProducto {
@@ -30,6 +33,9 @@
    .navbar {
     height: auto!important;
     padding-bottom: 10px!important;
+   }
+   .buttonVender {
+       width: 100%
    }
  }
 

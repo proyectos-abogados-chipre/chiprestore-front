@@ -147,7 +147,7 @@ export class AdministrarProductosComponent implements OnInit {
     const modalRef = this.dialog.open(ModalProductoComponent, {
       // width: '40rem',
       height: this.heigthModal,
-      maxHeight: 'calc(100% - 30px)',
+      maxHeight: 'calc(100% - 10px)',
       autoFocus: false,
     });
   }
@@ -158,7 +158,7 @@ export class AdministrarProductosComponent implements OnInit {
       {
         // width: '40rem',
         height: this.heigthModal,
-        maxHeight: 'calc(100% - 30px)',
+        maxHeight: 'calc(100% - 10px)',
         autoFocus: false,
         data: prenda
       }).afterClosed()

@@ -10,10 +10,11 @@ import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
     {path: 'login', component: LoginComponent},
-    { path: 'admin', component: AdminComponent, children: [
+    { path: 'admin', component: AdminComponent,
+    children: [
         { path: 'resume', component: ResumenComponent },
         { path: 'marketplaces', component: SucursalesComponent },
-        { path: 'product/manage', component: AdministrarProductosComponent },
+        { path: 'product/manage', component: AdministrarProductosComponent},
         {path: 'product/sales', component: VentasComponent},
         // { path: 'product/stock', component: FeatureComponent },
         { path: '**', redirectTo: 'product/manage'},
@@ -22,11 +23,11 @@ const routes: Routes = [
     {path: '**', component: LoginComponent}
     // { path: '**', component: AdminComponent },
 
-    //{ path: 'path/:routeParam', component: MyComponent },
-    //{ path: 'staticPath', component: ... },
-    //{ path: '**', component: ... },
-    //{ path: 'oldPath', redirectTo: '/staticPath' },
-    //{ path: ..., component: ..., data: { message: 'Custom' }
+    // { path: 'path/:routeParam', component: MyComponent },
+    // { path: 'staticPath', component: ... },
+    // { path: '**', component: ... },
+    // { path: 'oldPath', redirectTo: '/staticPath' },
+    // { path: ..., component: ..., data: { message: 'Custom' }
 ];
 
 export const appRoutes = RouterModule.forRoot(routes);

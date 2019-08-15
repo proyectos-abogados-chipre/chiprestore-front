@@ -1,5 +1,6 @@
 .img-logo {
     width: 85px;
+    height: 50%;
     margin-top: 10px;
     border-radius: 45px;
     border-top-left-radius: 45px;
@@ -30,5 +31,8 @@
 @media(max-width:450px){
     .container-login {
         width: 90%;
+    }
+    .img-logo {
+        position: sticky;
     }
 }

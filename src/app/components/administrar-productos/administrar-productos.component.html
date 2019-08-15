@@ -16,7 +16,7 @@
         class="row align-items-center" 
         *ngIf="visibleFilter"
         [formGroup]="formQuery"
-        [@animationFilter]="visible"
+        @animationFilter
         style="display: flex; margin:0px; justify-content: right; justify-content: flex-end; align-content: center; padding-top: 10px"
         >
         
@@ -102,7 +102,10 @@
     </div>
     <div *ngIf="!loading" class="card-columns">
         
-        <mat-card class="card" *ngFor="let prenda of prendasArray" style="margin-top: 10px; margin-bottom: 10px;" [@animationFilter]="visible">
+        <mat-card class="card" 
+        *ngFor="let prenda of prendasArray" 
+        style="margin-top: 10px; margin-bottom: 10px;" 
+        @animationFilter>
 
             <img mat-card-image src="{{prenda['img'][0]}}">
             <mat-card-content style="margin-bottom: 0%">
