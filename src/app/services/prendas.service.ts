@@ -358,4 +358,25 @@ export class PrendasService {
     }
     return result;
   }
+
+  getCategorias() {
+    const categorias = {prenda: [], marca: [], color: [], talle: []};
+    Object.values(this.getPrendasEj()).forEach(
+      (value: any) => {
+        value.nombre.split(' ').forEach(str => {
+          if (!categorias.prenda.includes(str)) {
+            categorias.prenda.push(str);
+          }
+        });
+        if (!categorias.marca.includes(value.marca)) {
+          categorias.marca.push(value.marca);
+        }
+        if (!categorias.color.includes(value.color)) {
+          categorias.color.push(value.color);
+        }
+      }
+    );
+    categorias.talle = ['xs', 's', 'm', 'l', 'xl'];
+    return categorias;
+  }
 }

@@ -19,7 +19,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './modal-producto.component.html',
   styleUrls: ['./modal-producto.component.css']
 })
-export class ModalProductoComponent implements OnInit{
+export class ModalProductoComponent implements OnInit {
 
   public formNuevoProducto: FormGroup;
   public stock: FormGroup;
@@ -151,6 +151,9 @@ export class ModalProductoComponent implements OnInit{
   }
   eliminarImg(index) {
     console.log(index);
+  }
+  imprimir(event?) {
+    event ? console.log(event) : console.log(this.formNuevoProducto.value);
   }
 
 }

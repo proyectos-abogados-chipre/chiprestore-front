@@ -65,12 +65,7 @@ export class AdministrarProductosComponent implements OnInit {
   visibleFilter: boolean;
   error: boolean;
   errorMsj: string;
-  strAutocomplete = {
-    prenda: [],
-    marca: [],
-    color: [],
-    talle: []
-  };
+  strAutocomplete: any;
   heigthModal: string;
 
   // visibleSidebar: Observable<State> = this.store.select(state => state.visible);
@@ -88,12 +83,13 @@ export class AdministrarProductosComponent implements OnInit {
     .subscribe((state: BreakpointState) => {
       if (state.matches) {
         this.heigthModal = '75%';
+        this.visibleFilter = true;
       } else {
-        this.heigthModal = '90%';
+        this.heigthModal = '95%';
+        this.visibleFilter = false;
       }
     });
     this.loading = true;
-    this.visibleFilter = false;
     this.initForms();
     this.prendasArray = Object.values(this.prendasService.getPrendasEj());
     this.itemsChip = Object.entries(this.formPrenda.value);
@@ -113,7 +109,7 @@ export class AdministrarProductosComponent implements OnInit {
     this.store.select('adminState').subscribe(resp => {
       // console.log ('recibe: ', resp);
     });
-    this.agruparCategorias();
+    this.strAutocomplete = this.prendasService.getCategorias();
   }
 
   initForms() {
@@ -128,18 +124,6 @@ export class AdministrarProductosComponent implements OnInit {
       categoria: '',
       valor: '',
     });
-  }
-
-// Transforma el conjunto de prendas recibida como un objeto a un array
-  getArray(prendasAsObject) {
-    const prendas: any[] = [];
-    Object.keys(prendasAsObject).forEach(
-      key => {
-        const prenda = prendasAsObject[key];
-        prendas.push(prenda);
-      }
-    );
-    return prendas;
   }
 
 // Abre la modal para crear un nuevo producto
@@ -172,6 +156,7 @@ export class AdministrarProductosComponent implements OnInit {
 
 // Realiza un get para obtener los productos filtrados por parametros del form
   buscarProductos() {
+    console.log(this.formQuery);
     const result = this.prendasService.searchPrendas(this.formPrenda.value);
     this.prendasArray = result;
   }
@@ -190,28 +175,6 @@ export class AdministrarProductosComponent implements OnInit {
     this.formPrenda.controls[categoria].setValue('');
     this.itemsChip = Object.entries(this.formPrenda.value);
     this.buscarProductos();
-  }
-
-
-
-// Agrupa en un objeto todas las opciones de cada categoria a sugerir
-  agruparCategorias() {
-    this.prendasArray.forEach(
-      (value: any) => {
-        value.nombre.split(' ').forEach(str => {
-          if (!this.strAutocomplete.prenda.includes(str)) {
-            this.strAutocomplete.prenda.push(str);
-          }
-        });
-        if (!this.strAutocomplete.marca.includes(value.marca)) {
-          this.strAutocomplete.marca.push(value.marca);
-        }
-        if (!this.strAutocomplete.color.includes(value.color)) {
-          this.strAutocomplete.color.push(value.color);
-        }
-      }
-    );
-    this.strAutocomplete.talle = ['xs', 's', 'm', 'l', 'xl'];
   }
 }
 

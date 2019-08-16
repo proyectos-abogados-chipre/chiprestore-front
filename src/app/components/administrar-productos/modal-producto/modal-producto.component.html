@@ -72,22 +72,35 @@
                   </mat-form-field>
                   
               </div>
-              <div class="row">            
-                  <mat-form-field  class="col" >
-                    <input matInput placeholder="Categoria">
-                  </mat-form-field>
+              <div class="row">  
+
+                  <app-filtro 
+                  class="col"
+                  [type]="'text'"
+                  [tittle]="'Categoria'"
+                  [options]="prendasService.getCategorias()['prenda']"
+                  ></app-filtro>
+
                   <mat-form-field  class="col">
                     <input matInput placeholder="Descripcion">
                   </mat-form-field>
                   
               </div>
               <div class="row">
-                <mat-form-field class="col">
-                <input matInput placeholder="Marca" formControlName="marca">
-                </mat-form-field>
-                <mat-form-field class="col">
-                <input matInput placeholder="Color" formControlName="color">
-                </mat-form-field>
+                <app-filtro 
+                  class="col"
+                  [type]="'text'"
+                  [tittle]="'Marca'"
+                  [options]="prendasService.getCategorias()['marca']"
+                  (selected)="formNuevoProducto.controls.marca.setValue($event)"
+                  ></app-filtro>
+                  <app-filtro 
+                  class="col"
+                  [type]="'text'"
+                  [tittle]="'Color'"
+                  [options]="prendasService.getCategorias()['color']"
+                  (selected)="formNuevoProducto.controls.color.setValue($event)"
+                  ></app-filtro>
               </div>
               <div class="row">
                 <mat-form-field class="col">
