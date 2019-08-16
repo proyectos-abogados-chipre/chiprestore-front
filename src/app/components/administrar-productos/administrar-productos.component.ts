@@ -65,7 +65,6 @@ export class AdministrarProductosComponent implements OnInit {
   visibleFilter: boolean;
   error: boolean;
   errorMsj: string;
-  strAutocomplete: any;
   heigthModal: string;
 
   // visibleSidebar: Observable<State> = this.store.select(state => state.visible);
@@ -109,7 +108,6 @@ export class AdministrarProductosComponent implements OnInit {
     this.store.select('adminState').subscribe(resp => {
       // console.log ('recibe: ', resp);
     });
-    this.strAutocomplete = this.prendasService.getCategorias();
   }
 
   initForms() {

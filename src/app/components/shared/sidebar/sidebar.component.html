@@ -7,39 +7,52 @@ height: -webkit-fill-available; overflow: auto; display: flex!important;">
     </div>
     <div class="mdc-drawer__content">
         <nav class="mdc-list">
+
             <a class="mdc-list-item"
             *ngIf="rol == 'administrador'"
             tabindex="0" 
-            [routerLink]="['/admin/resume']" 
             routerLinkActive="mdc-list-item--activated">
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">dashboard</i>
                 Resumen
             </a>
+
             <a 
             *ngIf="rol == 'administrador'"
             class="mdc-list-item" 
             tabindex="-1" 
-            [routerLink]="['/admin/marketplaces']" 
             routerLinkActive="mdc-list-item--activated">
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">home</i>
                 Sucursales
             </a>
+
             <hr class="mdc-list-divider">
+
             <h6 class="mdc-list-group__subheader">Productos</h6>
-            <a class="mdc-list-item" tabindex="-1" [routerLink]="['/admin/product/sales']" routerLinkActive="mdc-list-item--activated">
+            <a class="mdc-list-item" tabindex="-1" 
+            [routerLink]="['/admin/product/sales']" 
+            routerLinkActive="mdc-list-item--activated">
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">shopping_cart</i> 
                 Ventas
             </a>
-            <a class="mdc-list-item" tabindex="-1" [routerLink]="['/admin/product/manage']" routerLinkActive="mdc-list-item--activated">
+
+            <a class="mdc-list-item" tabindex="-1" 
+            [routerLink]="['/admin/product/manage']" 
+            routerLinkActive="mdc-list-item--activated">
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">assignment</i> 
                 Administrar
             </a>
-            <a class="mdc-list-item" tabindex="-1" *ngIf="rol == 'administrador'" href="https://chiprestore.com/admin/login">
+
+            <a class="mdc-list-item" 
+            tabindex="-1" 
+            *ngIf="rol == 'administrador'" 
+            href="https://chiprestore.com/admin/login">
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">local_mall</i> 
                 Tienda
             </a>
 
-            <a class="mdc-list-item" tabindex="-1" *ngIf="rol == 'administrador'">
+            <a class="mdc-list-item" 
+            tabindex="-1" 
+            *ngIf="rol == 'administrador'">
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">local_shipping</i> 
                 Movimientos
             </a>
@@ -51,24 +64,7 @@ height: -webkit-fill-available; overflow: auto; display: flex!important;">
                 Empleados
             </a>
             <hr class="mdc-list-divider">
-            <!-- <a class="mdc-list-item" tabindex="-1">
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">message</i> 
-                Mensajes
-            </a>
 
-            <hr class="mdc-list-divider"> 
-            <a class="mdc-list-item" tabindex="-1">
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">settings</i> 
-                Configuración
-            </a>
-            <a class="mdc-list-item" tabindex="-1">
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">announcement</i> 
-                Ayuda
-            </a> 
-             <a class="mdc-list-item">
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">assignment_ind</i>
-                Usuario
-            </a> -->
             <mat-expansion-panel style="background-color:inherit; color:inherit">
                 <mat-expansion-panel-header >
                         <mat-panel-title style="color:white; font-weight: 500;">

@@ -29,12 +29,6 @@ export class VentasComponent implements OnInit {
 
   ngOnInit() {
     this.initFormVenta();
-    // this.formVenta.controls.intereses.valueChanges.subscribe(
-    //   () => this.calcularMonto()
-    // );
-    // this.formVenta.controls.nroCuotas.valueChanges.subscribe(
-    //   () => this.calcularMonto()
-    // );
   }
 
   initFormVenta() {
@@ -119,7 +113,6 @@ export class VentasComponent implements OnInit {
 
 // Calcula el monto final a pagar de acuerdo a la forma de pago
   calcularMonto() {
-    console.log(this.formVenta.value);
     if (this.formVenta.value.medioPago !== undefined) {
       switch (this.formVenta.value.medioPago) {
         case 'efectivo': {
@@ -136,7 +129,7 @@ export class VentasComponent implements OnInit {
           const varValorCuota = varMontoFinal / this.formVenta.controls.nroCuotas.value;
           this.formVenta.patchValue({
             montoFinal: varMontoFinal,
-            valorCuota: varValorCuota,
+            valorCuota: varValorCuota.toFixed(2),
 
           });
           break;
@@ -144,6 +137,7 @@ export class VentasComponent implements OnInit {
 
       }
     }
+    console.log(this.formVenta.value);
   }
 
 // Registra la venta

@@ -34,7 +34,7 @@
             <app-filtro 
             class="col-sm-6"
             style="padding: 0px; margin-left: 1%; margin-right: 1%"
-            [options]="strAutocomplete[formQuery.controls.categoria.value]"
+            [options]="prendasService.getCategorias()[formQuery.controls.categoria.value]"
             [tittle]="'Busqueda'"
             [type]="'text'"
             (selected)="formQuery.controls.valor.setValue($event)"
