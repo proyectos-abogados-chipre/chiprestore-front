@@ -70,7 +70,7 @@ export class AdministrarProductosComponent implements OnInit {
   // visibleSidebar: Observable<State> = this.store.select(state => state.visible);
 
   constructor(public dialog: MatDialog,
-              private prendasService: PrendasService,
+              public prendasService: PrendasService,
               public store: Store<{visible: boolean}>,
               private fbuilder: FormBuilder,
               public breakpointObserver: BreakpointObserver
