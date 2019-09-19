@@ -28,7 +28,7 @@ export class ModalProductoComponent implements OnInit {
   public tab: number;
 
   constructor(private fbuilder: FormBuilder,
-              private prendasService: PrendasService,
+              public prendasService: PrendasService,
               public store: Store<State>,
               private snackbar: MatSnackBar,
               public modalRef: MatDialogRef<ModalProductoComponent>,
