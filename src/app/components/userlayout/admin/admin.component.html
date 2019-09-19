@@ -1,14 +1,19 @@
-<div class="d-flex" >
-    <mat-sidenav-container style="width: -webkit-fill-available; height: -webkit-fill-available;">
+<div class="d-flex" style="height: -webkit-fill-available;">
+    <mat-sidenav-container 
+    style="width: -webkit-fill-available; ">
        
-        <mat-sidenav mode="{{modeSidebar}}" #sidebar opened="{{ visibleSidebar }}" (closed)="cierraSidebar()">
+        <mat-sidenav 
+        mode="{{modeSidebar}}" 
+        #sidebar 
+        opened="{{ visibleSidebar }}" 
+        (closed)="cierraSidebar()">
             <!-- <div class="side-bar" > -->
                     <app-sidebar></app-sidebar>
             <!-- </div> -->
 
         </mat-sidenav>
 
-        <mat-sidenav-content class="" style=" overflow-y: auto; height: -webkit-fill-available;">
+        <mat-sidenav-content class="" style=" overflow-y: auto;">
             <router-outlet></router-outlet>
         </mat-sidenav-content>
     </mat-sidenav-container>

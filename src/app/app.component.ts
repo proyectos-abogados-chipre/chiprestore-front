@@ -12,12 +12,12 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'Chiprestore';
   constructor(private store: Store<Usuario>, private route: Router) {
-    this.store.select('adminState').subscribe(
-      state => {
-        if (state.usuario.userID === undefined) {
-          this.route.navigate(['login']);
-        }
-      });
+  //   this.store.select('adminState').subscribe(
+  //     state => {
+  //       if (state.usuario.userID === undefined) {
+  //         this.route.navigate(['login']);
+  //       }
+  //     });
   }
 }
 
