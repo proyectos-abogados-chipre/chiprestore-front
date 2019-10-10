@@ -306,11 +306,11 @@ export class PrendasService {
     return this.prendas;
   }
   getPrendas() {
-    return this.http.get(`${this.URL}/prendas.json`);
+    return this.http.get(`${this.URL}/products.json`);
   }
 
   postNuevaPrenda(prenda) {
-    return this.http.post(`${this.URL}/prendas.json`, prenda);
+    return this.http.post(`${this.URL}/products.json`, prenda);
   }
 
   postImagen(file: File) {
